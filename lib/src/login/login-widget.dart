@@ -9,11 +9,15 @@ class LoginWidget extends StatelessWidget {
     return BlocProvider<LoginBloc>(
       bloc: LoginBloc(),
       child: Material(
-              child: Stack(
+        child: Stack(
           fit: StackFit.expand,
           children: <Widget>[
-            Image.network("https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Transgender_Pride_flag.svg/1280px-Transgender_Pride_flag.svg.png", fit: BoxFit.cover),
-            Container(color: Colors.grey[700].withOpacity(0.1),),
+            Image.network(
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Transgender_Pride_flag.svg/1280px-Transgender_Pride_flag.svg.png",
+                fit: BoxFit.cover),
+            Container(
+              color: Colors.grey[700].withOpacity(0.1),
+            ),
             _LoginContent(),
           ],
         ),
@@ -25,6 +29,10 @@ class LoginWidget extends StatelessWidget {
 class _LoginContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
+
+  LoginBloc bloc = BlocProvider.of<LoginBloc>(context);
+
     _botoes() {
       return Column(
         children: <Widget>[
@@ -33,45 +41,51 @@ class _LoginContent extends StatelessWidget {
             textColor: Colors.white,
             icon: Icon(Icons.phone),
             label: Text("Login com Telefone"),
-            onPressed: () {},
+            onPressed: bloc.onClickTelefone,
           ),
           RaisedButton.icon(
             color: Colors.red,
             textColor: Colors.white,
             icon: Icon(FontAwesomeIcons.google),
             label: Text("Login com Google    "),
-            onPressed: () {},
+            onPressed: bloc.onClickGoogle,
           ),
           RaisedButton.icon(
             color: Colors.blue,
             textColor: Colors.white,
             icon: Icon(FontAwesomeIcons.facebookF),
             label: Text("Login com Facebook"),
-            onPressed: () {},
+            onPressed: bloc.onClickFacebook,
           ),
         ],
       );
     }
 
     return Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          FlutterLogo(
-            size: 72,
-          ),
-          Container(
-            height: 120,
-          ),
-          AnimatedCrossFade(
-            firstChild: _botoes(), 
-            secondChild: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: CircularProgressIndicator(),
-            ), 
-            duration: Duration(milliseconds: 500),
-            crossFadeState: CrossFadeState.showSecond,
-          ),
-        ],
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        FlutterLogo(
+          size: 72,
+        ),
+        Container(
+          height: 120,
+        ),
+        StreamBuilder(
+          stream: bloc.outLoading,
+          initialData: false,
+          builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+            return AnimatedCrossFade(
+              firstChild: _botoes(),
+              secondChild: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: CircularProgressIndicator(),
+              ),
+              duration: Duration(milliseconds: 500),
+              crossFadeState: snapshot.data ? CrossFadeState.showSecond : CrossFadeState.showFirst,
+            );
+          },
+        ),
+      ],
     );
   }
 }
