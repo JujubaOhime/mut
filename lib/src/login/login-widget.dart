@@ -7,7 +7,7 @@ class LoginWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<LoginBloc>(
-      bloc: LoginBloc(),
+      bloc: LoginBloc(context),
       child: Material(
         child: Stack(
           fit: StackFit.expand,

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "482486785907",
+    "firebase_url": "https://flutter-mut.firebaseio.com",
+    "project_id": "flutter-mut",
+    "storage_bucket": "flutter-mut.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:482486785907:android:0995f1b92bbad45e81d706",
+        "android_client_info": {
+          "package_name": "com.example.mut"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "482486785907-qdvohc1vsi0nlovmkvai867rkf101ir0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRPI0w4Od7rj-klfpWq96AZu8AIDwOpCU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "482486785907-qdvohc1vsi0nlovmkvai867rkf101ir0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
