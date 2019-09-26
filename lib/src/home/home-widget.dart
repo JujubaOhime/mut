@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mut/src/login/login-widget.dart';
 
@@ -8,7 +9,8 @@ class HomeWidget extends StatefulWidget {
 
 class _HomeWidgetState extends State<HomeWidget> {
 
-  _logout(){
+  _logout() async{
+    await FirebaseAuth.instance.signOut();
     Navigator.pushReplacement(context, 
     MaterialPageRoute(builder: (BuildContext context) => LoginWidget()));
   }

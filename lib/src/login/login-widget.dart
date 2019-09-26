@@ -18,7 +18,8 @@ class LoginWidget extends StatelessWidget {
             Container(
               color: Colors.grey[700].withOpacity(0.1),
             ),
-            _LoginContent(),
+            SingleChildScrollView(child: _LoginContent()),
+            //_LoginContent()
           ],
         ),
       ),
@@ -29,9 +30,8 @@ class LoginWidget extends StatelessWidget {
 class _LoginContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
-
-  LoginBloc bloc = BlocProvider.of<LoginBloc>(context);
+    LoginBloc bloc = BlocProvider.of<LoginBloc>(context);
+    bloc.checkLogin();
 
     _botoes() {
       return Column(
@@ -81,10 +81,16 @@ class _LoginContent extends StatelessWidget {
                 child: CircularProgressIndicator(),
               ),
               duration: Duration(milliseconds: 500),
-              crossFadeState: snapshot.data ? CrossFadeState.showSecond : CrossFadeState.showFirst,
+              crossFadeState: snapshot.data
+                  ? CrossFadeState.showSecond
+                  : CrossFadeState.showFirst,
             );
           },
         ),
+        TextField(
+          onChanged: bloc.phoneEvent.add,
+          onSubmitted: (String value) => bloc.onClickTelefone(),
+        )
       ],
     );
   }
