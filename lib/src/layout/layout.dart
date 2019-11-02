@@ -7,17 +7,26 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mut/src/home/home-widget.dart';
 import 'package:mut/src/layout/layout-bloc.dart';
 import 'package:mut/src/login/login-bloc.dart';
+import 'package:mut/src/login/login-widget.dart';
 import 'package:mut/src/services/authentication/Authentication.dart';
 
 class Layout {
   static File sampleImgage;
   static String nomeImagem;
 
+
+  
   static Scaffold getContent(BuildContext context, content) {
+    _logout() async{
+    await FirebaseAuth.instance.signOut();
+    Navigator.pushReplacement(context, 
+    MaterialPageRoute(builder: (BuildContext context) => LoginWidget()));
+  }
+
     LayoutBloc bloc = BlocProvider.of<LayoutBloc>(context);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: white(),
+        backgroundColor: Colors.pink,
         title: Text(
           "MUT",
           style: TextStyle(
@@ -30,7 +39,7 @@ class Layout {
       ),
       drawer: Drawer(
         child: Container(
-          color: light(),
+          color: Colors.white,
           child: ListView(
             children: <Widget>[
               UserAccountsDrawerHeader(
@@ -62,11 +71,18 @@ class Layout {
                   Navigator.of(context).pushNamed(HomeWidget.tag);
                 },
               ),
+              ListTile(
+                leading: Icon(FontAwesomeIcons.doorOpen),
+                title: Text("Sair"),
+                onTap: () {
+                  _logout();
+                },
+              ),
             ],
           ),
         )
       ),
-      backgroundColor: Layout.light(),
+      backgroundColor: Layout.white(),
       body: content, //parametro do scaffold
     );
 

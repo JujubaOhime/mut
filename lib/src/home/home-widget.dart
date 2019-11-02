@@ -20,9 +20,7 @@ class HomeWidget extends StatelessWidget {
 
     @override
     Widget build(BuildContext context) {
-       final content = StreamBuilder(
-
-       );
+       final content = Container();
       return Layout.getContent(context, content);
     }
 
