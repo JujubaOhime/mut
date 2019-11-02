@@ -8,6 +8,8 @@ class Authentication {
   final _firebase = FirebaseAuth.instance;
   final _google = new GoogleSignIn();
 
+  static FirebaseUser usuarioLogado;
+
   Future<bool> signWithGoogle() async{
     final googleAuthentication = await _google.signIn();
 
@@ -19,7 +21,14 @@ class Authentication {
       print(usarioAutenticado.email);
       print(usarioAutenticado.displayName);
       
+      Authentication.usuarioLogado = usarioAutenticado;
+
       return usarioAutenticado?.uid != null;
+  }
+
+    signOutWithGoogle() async{
+    await _firebase.signOut();
+    await _google.signOut();
   }
 
   Future<bool> signWithPhone(String verificacaoId, String codigoSms) async {

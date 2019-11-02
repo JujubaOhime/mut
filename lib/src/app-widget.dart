@@ -1,4 +1,5 @@
 import 'package:mut/src/app-bloc.dart';
+import 'package:mut/src/home/home-widget.dart';
 import 'package:mut/src/login/login-widget.dart';
 
 
@@ -12,10 +13,18 @@ class MyApp extends StatelessWidget{
     return BlocProvider<AppBloc>(
       bloc: AppBloc(),
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.pink,
         ),
-        home: LoginWidget()
+        home: LoginWidget(),
+        initialRoute: '/',
+        routes: {
+          "home-page": (context) => HomeWidget(),
+          //"/screen2": (context) => Screen2(),
+          //"/screen3": (context) => Screen3(),
+        },
+        
       )
       
     );
