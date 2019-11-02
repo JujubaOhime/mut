@@ -18,7 +18,7 @@ class LoginBloc extends BlocBase{
   Observable<String> get smsFlux => _smsController.stream;
   Sink<String> get smsEvent => _smsController.sink;
 
-  var _controllerLoading = BehaviorSubject<bool>(seedValue: true);
+  var _controllerLoading = BehaviorSubject<bool>(seedValue: false);
 
   
   Stream<bool> get outLoading => _controllerLoading.stream;
@@ -26,9 +26,6 @@ class LoginBloc extends BlocBase{
   final BuildContext context;
   LoginBloc(this.context);
 
-  onClickFacebook(){
-
-  }
 
   onClickGoogle() async{
     _controllerLoading.add(true);

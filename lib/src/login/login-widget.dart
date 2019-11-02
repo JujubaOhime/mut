@@ -35,7 +35,7 @@ class _LoginContent extends StatelessWidget {
 
   Future<String> createAlertDialog(BuildContext context){
     LoginBloc bloc = BlocProvider.of<LoginBloc>(context);
-    bloc.checkLogin();
+    //0bloc.checkLogin();
     TextEditingController customController = new TextEditingController();
 
     return showDialog(context: context, builder: (context){
@@ -66,7 +66,7 @@ class _LoginContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     LoginBloc bloc = BlocProvider.of<LoginBloc>(context);
-    bloc.checkLogin();
+    //bloc.checkLogin();
 
     _botoes() {
       return Column(
@@ -115,13 +115,11 @@ class _LoginContent extends StatelessWidget {
             return AnimatedCrossFade(
               firstChild: _botoes(),
               secondChild: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(0.0),
                 child: CircularProgressIndicator(),
               ),
-              duration: Duration(milliseconds: 500),
-              crossFadeState: snapshot.data
-                  ? CrossFadeState.showSecond
-                  : CrossFadeState.showFirst,
+              duration: Duration(milliseconds: 500, ),
+              crossFadeState: snapshot.data ? CrossFadeState.showSecond : CrossFadeState.showFirst,
             );
           },
         ),

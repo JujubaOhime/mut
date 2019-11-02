@@ -5,19 +5,19 @@ import 'dart:async';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class Authentication {
-  final _firebase = FirebaseAuth.instance;
+  final FirebaseAuth _firebase = FirebaseAuth.instance;
   final _google = new GoogleSignIn();
 
   static FirebaseUser usuarioLogado;
 
   Future<bool> signWithGoogle() async{
     final googleAuthentication = await _google.signIn();
-
     final authenticated = await googleAuthentication.authentication;
 
     final usarioAutenticado = await _firebase.signInWithGoogle(
         idToken: authenticated?.idToken,
-        accessToken: authenticated?.accessToken);
+        accessToken: authenticated?.accessToken
+      );
       print(usarioAutenticado.email);
       print(usarioAutenticado.displayName);
       
