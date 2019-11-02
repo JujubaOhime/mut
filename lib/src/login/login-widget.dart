@@ -43,6 +43,7 @@ class _LoginContent extends StatelessWidget {
         title: Text("Escreva Seu Telefone"),
         content: TextField(
           controller: customController,
+          textAlign: TextAlign.center,
           decoration: InputDecoration(
             hintText: "+5521999999999"
           )
