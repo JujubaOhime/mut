@@ -50,6 +50,17 @@ class LoginBloc extends BlocBase{
     MaterialPageRoute(builder: (BuildContext context) => HomeWidget()));
   }
 
+  onClickTelefone2(String value) async {
+    _controllerLoading.add(!_controllerLoading.value);
+
+    await _authentication.verifyPhoneNumber(value);
+    _controllerLoading.add(!_controllerLoading.value);
+
+    Navigator.pushReplacement(context, 
+    MaterialPageRoute(builder: (BuildContext context) => HomeWidget()));
+  }
+
+
   checkLogin() async{
     FirebaseUser usuarioAutenticado = await FirebaseAuth.instance.currentUser();
     if(usuarioAutenticado != null){
