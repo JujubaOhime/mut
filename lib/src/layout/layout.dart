@@ -27,14 +27,7 @@ class Layout {
       appBar: AppBar(
         iconTheme: IconThemeData(color: Layout.lightPink()),
         backgroundColor: Layout.white(),
-        title: Text(
-          "MUT",
-          style: TextStyle(
-            fontSize: 25,
-            color: Layout.lightPink(),
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+        title: Image.asset('assets/transBlue.png', height: 35),
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(bottom: Radius.circular(30))),
         centerTitle: true,

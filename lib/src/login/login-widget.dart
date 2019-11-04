@@ -102,11 +102,13 @@ class _LoginContent extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        FlutterLogo(
-          size: 72,
-        ),
+        Image.asset('assets/trans.png',
+        height: 150,),
+        //FlutterLogo(
+          //size: 72,
+        //),
         Container(
-          height: 120,
+          height: 100,
         ),
         StreamBuilder(
           stream: bloc.outLoading,
