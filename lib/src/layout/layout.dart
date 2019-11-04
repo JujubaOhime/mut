@@ -15,38 +15,37 @@ class Layout {
   static File sampleImgage;
   static String nomeImagem;
 
-
-  
   static Scaffold getContent(BuildContext context, content) {
-    _logout() async{
-    await FirebaseAuth.instance.signOut();
-    Navigator.pushReplacement(context, 
-    MaterialPageRoute(builder: (BuildContext context) => LoginWidget()));
-  }
+    _logout() async {
+      await FirebaseAuth.instance.signOut();
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (BuildContext context) => LoginWidget()));
+    }
 
     LayoutBloc bloc = BlocProvider.of<LayoutBloc>(context);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.pink,
+        iconTheme: IconThemeData(color: Layout.rosaClaro()),
+        backgroundColor: Colors.white,
         title: Text(
           "MUT",
           style: TextStyle(
             fontSize: 25,
-            color: Layout.white(),
+            color: Layout.rosaClaro(),
             fontWeight: FontWeight.bold,
           ),
         ),
-        shape: RoundedRectangleBorder
-        (
-          borderRadius: BorderRadius.vertical(bottom: Radius.circular(30))
-        ),
-        centerTitle: true, 
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(bottom: Radius.circular(30))),
+        centerTitle: true,
       ),
       drawer: ClipRRect(
-        borderRadius: BorderRadius.circular(30),
+        borderRadius: BorderRadius.only(
+          topRight: Radius.circular(30),
+          bottomRight: Radius.circular(30)
+        ),
         child: Drawer(
-        
-        child: Container(
+          child: Container(
           color: Colors.white,
           child: ListView(
             children: <Widget>[
@@ -67,8 +66,8 @@ class Layout {
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     fit: BoxFit.fill,
-                    image: NetworkImage("https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Transgender_Pride_flag.svg/1280px-Transgender_Pride_flag.svg.png"),
-                    
+                    image: NetworkImage(
+                        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Transgender_Pride_flag.svg/1280px-Transgender_Pride_flag.svg.png"),
                   ),
                 ),
               ),
@@ -97,29 +96,29 @@ class Layout {
               ),
             ],
           ),
-        )
+        )),
       ),
-      ),
-      
-      backgroundColor: Layout.white(),
+
+      backgroundColor: Layout.rosaClaro(),
       body: content, //parametro do scaffold
     );
-
-    
   }
-    static Color primary([double opacity = 1]) =>
-    Color.fromRGBO(229, 176, 97, opacity); //'amarelo'
-    static Color secundary([double opacity = 1]) =>
-    Color.fromRGBO(31, 22, 86, opacity); //'azul'
-    static Color light([double opacity = 1]) =>
-    Color.fromRGBO(255, 247, 209, opacity); //papel
-    static Color white([double opacity = 1]) =>
-    Color.fromRGBO(255, 255, 255, opacity); //branco
-    static Color font([double opacity = 1]) =>
-    Color.fromRGBO(43, 53, 56, opacity); //cinza
 
-    static Color accent([double opacity = 1]) =>
-    Color.fromRGBO(99, 24, 29, opacity); //vinho
-    static Color accentLight([double opacity = 1]) =>
-    Color.fromRGBO(127, 24, 29, opacity); //vermelho   
+  static Color primary([double opacity = 1]) =>
+      Color.fromRGBO(229, 176, 97, opacity); //'amarelo'
+  static Color rosaClaro() =>
+      Color.fromRGBO(241 , 140 , 142, 1);
+  static Color secundary([double opacity = 1]) =>
+      Color.fromRGBO(31, 22, 86, opacity); //'azul'
+  static Color light([double opacity = 1]) =>
+      Color.fromRGBO(255, 247, 209, opacity); //papel
+  static Color white([double opacity = 1]) =>
+      Color.fromRGBO(250, 250, 250, opacity); //branco
+  static Color font([double opacity = 1]) =>
+      Color.fromRGBO(43, 53, 56, opacity); //cinza
+
+  static Color accent([double opacity = 1]) =>
+      Color.fromRGBO(99, 24, 29, opacity); //vinho
+  static Color accentLight([double opacity = 1]) =>
+      Color.fromRGBO(127, 24, 29, opacity); //vermelho
 }

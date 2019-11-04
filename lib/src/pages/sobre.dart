@@ -23,7 +23,16 @@ class _AboutPageState extends StatelessWidget {
     return Layout.getContent(
       context,
       Center(
-        child: Text("Este app foi criado por Amélia e João"),
+        child: Container(
+          margin: EdgeInsets.all(10.0),
+          child: Text(
+            "Este app foi criado por Amélia e João",
+            style: TextStyle(
+              fontSize: 25,
+              color: Layout.white(),
+            ),
+          textAlign: TextAlign.center,
+        )),
       ),
     );
   }
