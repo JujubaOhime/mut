@@ -4,10 +4,10 @@ import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:mut/src/home/home-widget.dart';
 import 'package:mut/src/layout/layout-bloc.dart';
 import 'package:mut/src/login/login-bloc.dart';
 import 'package:mut/src/login/login-widget.dart';
+import 'package:mut/src/pages/home-widget.dart';
 import 'package:mut/src/pages/sobre.dart';
 import 'package:mut/src/services/authentication/Authentication.dart';
 
@@ -25,13 +25,13 @@ class Layout {
     LayoutBloc bloc = BlocProvider.of<LayoutBloc>(context);
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Layout.rosaClaro()),
-        backgroundColor: Colors.white,
+        iconTheme: IconThemeData(color: Layout.lightPink()),
+        backgroundColor: Layout.white(),
         title: Text(
           "MUT",
           style: TextStyle(
             fontSize: 25,
-            color: Layout.rosaClaro(),
+            color: Layout.lightPink(),
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -46,14 +46,14 @@ class Layout {
         ),
         child: Drawer(
           child: Container(
-          color: Colors.white,
+          color: Layout.white(),
           child: ListView(
             children: <Widget>[
               UserAccountsDrawerHeader(
                 accountName: Text(Authentication.usuarioLogado.displayName,
-                    style: TextStyle(color: white())),
+                    style: TextStyle(color: Layout.white())),
                 accountEmail: Text(Authentication.usuarioLogado.email,
-                    style: TextStyle(color: white())),
+                    style: TextStyle(color: Layout.white())),
                 currentAccountPicture: GestureDetector(
                   child: CircleAvatar(
                     backgroundImage:
@@ -72,7 +72,8 @@ class Layout {
                 ),
               ),
               ListTile(
-                leading: Icon(FontAwesomeIcons.home),
+                leading: Icon(FontAwesomeIcons.home, color: Layout.lightBlue(),
+                ),
                 title: Text("Home"),
                 onTap: () {
                   Navigator.of(context).pop();
@@ -80,14 +81,14 @@ class Layout {
                 },
               ),
               ListTile(
-                leading: Icon(FontAwesomeIcons.doorOpen),
+                leading: Icon(FontAwesomeIcons.doorOpen, color: Layout.lightBlue()),
                 title: Text("Sair"),
                 onTap: () {
                   _logout();
                 },
               ),
               ListTile(
-                leading: Icon(FontAwesomeIcons.infoCircle),
+                leading: Icon(FontAwesomeIcons.infoCircle, color: Layout.lightBlue()),
                 title: Text("Sobre"),
                 onTap: () {
                   Navigator.of(context).pop();
@@ -99,17 +100,17 @@ class Layout {
         )),
       ),
 
-      backgroundColor: Layout.rosaClaro(),
+      backgroundColor: Layout.lightPink(),
       body: content, //parametro do scaffold
     );
   }
 
   static Color primary([double opacity = 1]) =>
       Color.fromRGBO(229, 176, 97, opacity); //'amarelo'
-  static Color rosaClaro() =>
-      Color.fromRGBO(241 , 140 , 142, 1);
-  static Color secundary([double opacity = 1]) =>
-      Color.fromRGBO(31, 22, 86, opacity); //'azul'
+  static Color lightPink() =>
+      Color.fromRGBO(247 , 168 , 184, 1);
+  static Color lightBlue([double opacity = 1]) =>
+      Color.fromRGBO(85, 205, 252, opacity); //'azul'
   static Color light([double opacity = 1]) =>
       Color.fromRGBO(255, 247, 209, opacity); //papel
   static Color white([double opacity = 1]) =>
@@ -121,4 +122,6 @@ class Layout {
       Color.fromRGBO(99, 24, 29, opacity); //vinho
   static Color accentLight([double opacity = 1]) =>
       Color.fromRGBO(127, 24, 29, opacity); //vermelho
+
+
 }

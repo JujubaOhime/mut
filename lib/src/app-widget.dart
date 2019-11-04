@@ -1,10 +1,10 @@
 import 'package:mut/src/app-bloc.dart';
-import 'package:mut/src/home/home-widget.dart';
 import 'package:mut/src/login/login-widget.dart';
 
 
 import 'package:flutter/material.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
+import 'package:mut/src/pages/home-widget.dart';
 import 'package:mut/src/pages/sobre.dart';
 
 class MyApp extends StatelessWidget{
