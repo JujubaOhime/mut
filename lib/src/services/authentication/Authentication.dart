@@ -22,7 +22,6 @@ class Authentication {
       print(usarioAutenticado.displayName);
       
       Authentication.usuarioLogado = usarioAutenticado;
-
       return usarioAutenticado?.uid != null;
   }
 

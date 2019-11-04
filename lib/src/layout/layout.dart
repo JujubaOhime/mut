@@ -8,6 +8,7 @@ import 'package:mut/src/home/home-widget.dart';
 import 'package:mut/src/layout/layout-bloc.dart';
 import 'package:mut/src/login/login-bloc.dart';
 import 'package:mut/src/login/login-widget.dart';
+import 'package:mut/src/pages/sobre.dart';
 import 'package:mut/src/services/authentication/Authentication.dart';
 
 class Layout {
@@ -35,9 +36,16 @@ class Layout {
             fontWeight: FontWeight.bold,
           ),
         ),
+        shape: RoundedRectangleBorder
+        (
+          borderRadius: BorderRadius.vertical(bottom: Radius.circular(30))
+        ),
         centerTitle: true, 
       ),
-      drawer: Drawer(
+      drawer: ClipRRect(
+        borderRadius: BorderRadius.circular(30),
+        child: Drawer(
+        
         child: Container(
           color: Colors.white,
           child: ListView(
@@ -79,10 +87,20 @@ class Layout {
                   _logout();
                 },
               ),
+              ListTile(
+                leading: Icon(FontAwesomeIcons.infoCircle),
+                title: Text("Sobre"),
+                onTap: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).pushNamed(AboutPage.tag);
+                },
+              ),
             ],
           ),
         )
       ),
+      ),
+      
       backgroundColor: Layout.white(),
       body: content, //parametro do scaffold
     );

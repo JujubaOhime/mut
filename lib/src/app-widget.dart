@@ -5,6 +5,7 @@ import 'package:mut/src/login/login-widget.dart';
 
 import 'package:flutter/material.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
+import 'package:mut/src/pages/sobre.dart';
 
 class MyApp extends StatelessWidget{
 
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget{
         initialRoute: '/',
         routes: {
           "home-page": (context) => HomeWidget(),
+          'about-page':(context) => AboutPage(),
           //"/screen2": (context) => Screen2(),
           //"/screen3": (context) => Screen3(),
         },
