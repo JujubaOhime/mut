@@ -8,6 +8,7 @@ import 'package:mut/src/layout/layout-bloc.dart';
 import 'package:mut/src/login/login-bloc.dart';
 import 'package:mut/src/login/login-widget.dart';
 import 'package:mut/src/pages/home-widget.dart';
+import 'package:mut/src/pages/matches.dart';
 import 'package:mut/src/pages/sobre.dart';
 import 'package:mut/src/services/authentication/Authentication.dart';
 
@@ -31,66 +32,72 @@ class Layout {
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(bottom: Radius.circular(30))),
         centerTitle: true,
+        actions: <Widget>[
+          new IconButton( icon: new Icon(Icons.favorite), onPressed: (){
+            Navigator.of(context).pop();
+            Navigator.of(context).pushNamed(MatchWidget.tag);
+          }, ),
+        ],
       ),
       drawer: ClipRRect(
         borderRadius: BorderRadius.only(
-          topRight: Radius.circular(30),
-          bottomRight: Radius.circular(30)
+            topRight: Radius.circular(30),
+            bottomRight: Radius.circular(30)
         ),
         child: Drawer(
-          child: Container(
-          color: Layout.white(),
-          child: ListView(
-            children: <Widget>[
-              UserAccountsDrawerHeader(
-                accountName: Text(Authentication.usuarioLogado.displayName,
-                    style: TextStyle(color: Layout.white())),
-                accountEmail: Text(Authentication.usuarioLogado.email,
-                    style: TextStyle(color: Layout.white())),
-                currentAccountPicture: GestureDetector(
-                  child: CircleAvatar(
-                    backgroundImage:
+            child: Container(
+              color: Layout.white(),
+              child: ListView(
+                children: <Widget>[
+                  UserAccountsDrawerHeader(
+                    accountName: Text(Authentication.usuarioLogado.displayName,
+                        style: TextStyle(color: Layout.white())),
+                    accountEmail: Text(Authentication.usuarioLogado.email,
+                        style: TextStyle(color: Layout.white())),
+                    currentAccountPicture: GestureDetector(
+                      child: CircleAvatar(
+                        backgroundImage:
                         NetworkImage(Authentication.usuarioLogado.photoUrl),
+                      ),
+                      onTap: () {
+                        bloc.changeAcount();
+                      },
+                    ),
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        fit: BoxFit.fill,
+                        image: NetworkImage(
+                            "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Transgender_Pride_flag.svg/1280px-Transgender_Pride_flag.svg.png"),
+                      ),
+                    ),
                   ),
-                  onTap: () {
-                    bloc.changeAcount();
-                  },
-                ),
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    fit: BoxFit.fill,
-                    image: NetworkImage(
-                        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Transgender_Pride_flag.svg/1280px-Transgender_Pride_flag.svg.png"),
+                  ListTile(
+                    leading: Icon(FontAwesomeIcons.home, color: Layout.lightBlue(),
+                    ),
+                    title: Text("Home"),
+                    onTap: () {
+                      Navigator.of(context).pop();
+                      Navigator.of(context).pushNamed(HomeWidget.tag);
+                    },
                   ),
-                ),
+                  ListTile(
+                    leading: Icon(FontAwesomeIcons.doorOpen, color: Layout.lightBlue()),
+                    title: Text("Sair"),
+                    onTap: () {
+                      _logout();
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(FontAwesomeIcons.infoCircle, color: Layout.lightBlue()),
+                    title: Text("Sobre"),
+                    onTap: () {
+                      Navigator.of(context).pop();
+                      Navigator.of(context).pushNamed(AboutPage.tag);
+                    },
+                  ),
+                ],
               ),
-              ListTile(
-                leading: Icon(FontAwesomeIcons.home, color: Layout.lightBlue(),
-                ),
-                title: Text("Home"),
-                onTap: () {
-                  Navigator.of(context).pop();
-                  Navigator.of(context).pushNamed(HomeWidget.tag);
-                },
-              ),
-              ListTile(
-                leading: Icon(FontAwesomeIcons.doorOpen, color: Layout.lightBlue()),
-                title: Text("Sair"),
-                onTap: () {
-                  _logout();
-                },
-              ),
-              ListTile(
-                leading: Icon(FontAwesomeIcons.infoCircle, color: Layout.lightBlue()),
-                title: Text("Sobre"),
-                onTap: () {
-                  Navigator.of(context).pop();
-                  Navigator.of(context).pushNamed(AboutPage.tag);
-                },
-              ),
-            ],
-          ),
-        )),
+            )),
       ),
 
       backgroundColor: Layout.lightPink(),
