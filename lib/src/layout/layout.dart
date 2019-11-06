@@ -8,6 +8,7 @@ import 'package:mut/src/layout/layout-bloc.dart';
 import 'package:mut/src/login/login-bloc.dart';
 import 'package:mut/src/login/login-widget.dart';
 import 'package:mut/src/pages/home-widget.dart';
+import 'package:mut/src/pages/matches.dart';
 import 'package:mut/src/pages/sobre.dart';
 import 'package:mut/src/services/authentication/Authentication.dart';
 
@@ -31,6 +32,12 @@ class Layout {
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(bottom: Radius.circular(30))),
         centerTitle: true,
+        actions: <Widget>[
+          new IconButton( icon: new Icon(Icons.favorite), onPressed: (){
+            Navigator.of(context).pop();
+            Navigator.of(context).pushNamed(MatchWidget.tag);
+          }, ),
+        ],
       ),
       drawer: ClipRRect(
         borderRadius: BorderRadius.only(
