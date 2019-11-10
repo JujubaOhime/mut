@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:mut/src/layout/layout-bloc.dart';
 import 'package:mut/src/layout/layout.dart';
 import 'package:mut/src/login/login-widget.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:mut/src/services/authentication/Authentication.dart';
 
 class HomeWidget extends StatelessWidget {
   static String tag = "home-page";
@@ -21,6 +23,19 @@ class HomeWidget extends StatelessWidget {
     @override
     Widget build(BuildContext context) {
        final content = Container();
+       
+       /*RaisedButton(
+         onPressed: () async {
+          Firestore.instance.collection('user').add({
+          'uid': Authentication.usuarioLogado.uid,
+          'nome': "sem nome",
+          'descricao': "sem descricao",
+          'phone': "+552199343299"
+            });
+         }
+         
+       );*/
+        
       return Layout.getContent(context, content);
     }
 
