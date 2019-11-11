@@ -14,6 +14,7 @@ class HomeWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<LayoutBloc>(
       bloc: LayoutBloc(context),
+      
       child: _HomeWidgetState(),
     );
   }
@@ -24,17 +25,7 @@ class HomeWidget extends StatelessWidget {
     Widget build(BuildContext context) {
        final content = Container();
        
-       /*RaisedButton(
-         onPressed: () async {
-          Firestore.instance.collection('user').add({
-          'uid': Authentication.usuarioLogado.uid,
-          'nome': "sem nome",
-          'descricao': "sem descricao",
-          'phone': "+552199343299"
-            });
-         }
-         
-       );*/
+       
         
       return Layout.getContent(context, content);
     }

@@ -32,7 +32,8 @@ class _AboutPageState extends StatelessWidget {
               color: Layout.white(),
             ),
           textAlign: TextAlign.center,
-        )),
+        )
+        ),
       ),
     );
   }
