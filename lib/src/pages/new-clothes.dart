@@ -16,8 +16,8 @@ class NewClothesPage extends StatefulWidget {
 }
 
 class _NewClothesState extends State<NewClothesPage> {
-  String size, description, photo, title, type;
-  String uid;
+  String size, description, photo, title, type, state;
+  String uid; 
   Timestamp time;
 
   getSize(size) {
@@ -40,6 +40,10 @@ class _NewClothesState extends State<NewClothesPage> {
     this.type = type;
   }
 
+  getState(state) {
+    this.state = state;
+  }
+
   createData() {
     DocumentReference ds =
         Firestore.instance.collection('Clothes').document(title);
@@ -51,6 +55,7 @@ class _NewClothesState extends State<NewClothesPage> {
       "uid": Authentication.usuarioLogado.uid,
       "description": description,
       "time": DateTime.now(),
+      "state": "Rio de Janeiro",
     };
 
     ds.setData(clothes).whenComplete(() {
