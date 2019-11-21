@@ -10,6 +10,8 @@ import 'package:mut/src/services/authentication/Authentication.dart';
 class HomeWidget extends StatelessWidget {
   static String tag = "home-page";
 
+  
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider<LayoutBloc>(
@@ -21,9 +23,30 @@ class HomeWidget extends StatelessWidget {
 }
   class _HomeWidgetState extends StatelessWidget {
 
+    List<Widget> makeListWidget(AsyncSnapshot snapshot){
+      return snapshot.data.documents.map<Widget>((document){
+        return ListTile(
+          title: Text(document["nome"]),
+          subtitle: Text(document["uid"]),
+        );
+      }).toList();
+    }
+
     @override
     Widget build(BuildContext context) {
-       final content = Container();
+       final content =  StreamBuilder(
+         stream: Firestore.instance.collection("users").snapshots(),
+         builder: (context, snapshot){
+           if(!snapshot.hasData){
+             const Text("Loading");
+           }
+           else{
+            return ListView(
+              children: makeListWidget(snapshot),
+            );
+           }
+         },
+       );
        
        
         

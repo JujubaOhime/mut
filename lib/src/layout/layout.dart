@@ -9,6 +9,7 @@ import 'package:mut/src/login/login-bloc.dart';
 import 'package:mut/src/login/login-widget.dart';
 import 'package:mut/src/pages/home-widget.dart';
 import 'package:mut/src/pages/matches.dart';
+import 'package:mut/src/pages/new-clothes.dart';
 import 'package:mut/src/pages/sobre.dart';
 import 'package:mut/src/services/authentication/Authentication.dart';
 
@@ -81,10 +82,11 @@ class Layout {
                 },
               ),
               ListTile(
-                leading: Icon(FontAwesomeIcons.doorOpen, color: Layout.lightBlue()),
-                title: Text("Sair"),
+                leading: Icon(FontAwesomeIcons.plusCircle, color: Layout.lightBlue()),
+                title: Text("Adicionar Roupa"),
                 onTap: () {
-                  _logout();
+                  Navigator.of(context).pop();
+                  Navigator.of(context).pushNamed(NewClothesPage.tag);
                 },
               ),
               ListTile(
@@ -93,6 +95,13 @@ class Layout {
                 onTap: () {
                   Navigator.of(context).pop();
                   Navigator.of(context).pushNamed(AboutPage.tag);
+                },
+              ),
+              ListTile(
+                leading: Icon(FontAwesomeIcons.doorOpen, color: Layout.lightBlue()),
+                title: Text("Sair"),
+                onTap: () {
+                  _logout();
                 },
               ),
             ],

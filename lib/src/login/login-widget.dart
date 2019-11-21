@@ -84,7 +84,7 @@ class _LoginContent extends StatelessWidget {
             color: Colors.red,
             textColor: Colors.white,
             icon: Icon(FontAwesomeIcons.google),
-            label: Text("Login com Google  "),
+            label: Text("Login com Google    "),
             onPressed: bloc.onClickGoogle,
           ),
         ],
