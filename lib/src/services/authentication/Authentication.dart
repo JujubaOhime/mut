@@ -1,4 +1,5 @@
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:async';
 
@@ -18,10 +19,24 @@ class Authentication {
         idToken: authenticated?.idToken,
         accessToken: authenticated?.accessToken
       );
+      Authentication.usuarioLogado = usarioAutenticado;
+
+      
+      String name, email, photo;
+      email = Authentication.usuarioLogado.email;
+      DocumentReference ds = Firestore.instance.collection('User').document(email);
+      Map<String, dynamic> users = {
+        "email": Authentication.usuarioLogado.email,
+        "photo": Authentication.usuarioLogado.photoUrl,
+        "name": Authentication.usuarioLogado.displayName,
+        "uid": Authentication.usuarioLogado.uid,
+      };
+      ds.setData(users).whenComplete((){
+        print("usuário atualizado");
+      });
       print(usarioAutenticado.email);
       print(usarioAutenticado.displayName);
       
-      Authentication.usuarioLogado = usarioAutenticado;
       return usarioAutenticado?.uid != null;
   }
 

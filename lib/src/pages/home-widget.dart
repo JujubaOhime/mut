@@ -33,68 +33,68 @@ class _HomeWidgetState extends StatelessWidget {
     final regularTextStyle = baseTextStyle.copyWith(
         color: Layout.white(),
         fontSize: 14.0,
-        fontWeight: FontWeight.w400);
+        fontWeight: FontWeight.w400,);
     final subHeaderTextStyle = regularTextStyle.copyWith(fontSize: 17.0);
     final headerTextStyle = baseTextStyle.copyWith(
-        color: Colors.white, fontSize: 25.0, fontWeight: FontWeight.w600);
+        color: Colors.white, fontSize: 25.0, fontWeight: FontWeight.w600, );
 
     _clothesImage(DocumentSnapshot doc) => Container(
-      margin: EdgeInsets.symmetric(vertical: 0),
-      alignment: FractionalOffset.centerLeft,
-      height: 130.0,
+      margin: const EdgeInsets.only(bottom: 30) ,
+      alignment: Alignment.center,
+      height: 150.0,
       width: 80.0,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8.0),
-        image: DecorationImage(
-          image: NetworkImage(doc["photo"]),
-          fit: BoxFit.fill,
-        ),
-      ),
+      child: Image.network(doc["photo"],fit: BoxFit.cover),
     );
 
 
     _clothesCard(DocumentSnapshot doc) => Container(
-      height: 130.0,
+      height: 380,
       child: Container(
-        margin: EdgeInsets.fromLTRB(90.0, 10.0, 16.0, 16.0),
+        margin: EdgeInsets.fromLTRB(10,0,10,0),
         constraints: BoxConstraints.expand(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Container(height: 3.0),
-            Row(
-              children: <Widget>[
-                Text(
-                  title(doc['title'].toString()),
-                  style: headerTextStyle,
-                ),
-                Container(
-                  width: 10,
-                ),
-                Text( "Tam " +
-                  doc["size"], 
-                  style: subHeaderTextStyle,
-                ),
-              ],
+            Padding(
+              
+                padding: EdgeInsets.only(bottom: 20, top: 30, left:20, right: 20),
+                child: new ClipRRect(
+                  borderRadius: new BorderRadius.circular(8.0),
+                  child: Image.network(doc["photo"],fit: BoxFit.cover, height: 200, alignment: Alignment.center, width: double.maxFinite)
+                )
+                 
             ),
-            Text(doc['type'], style: subHeaderTextStyle),
+            Center(
+                child: Text(title(doc['title'].toString()), textAlign: TextAlign.center, style: headerTextStyle)
+            ),
+            Padding(
+              padding: EdgeInsets.only(top:15,),
+              child: Text(title(doc['type']), style: subHeaderTextStyle),
+            ),
+            
             Container(
                 margin: EdgeInsets.symmetric(vertical: 8.0),
-                height: 2.0,  
+                //height: 2.0,  
                 width: 25.0,
                 color: Layout.lightBlue()),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Expanded(
                   child: Row(children: <Widget>[
                     Image.asset(
-                      'assets/ic_distance.png',
-                      height: 15,
+                      'assets/ic_distance2.png',
+                      height: 30,
                     ),
                     Container(width: 8.0),
                     Text("95 km", style: regularTextStyle),
                   ]),
-                )
+                ),
+                Text( "Tamanho " +
+                  doc["size"], 
+                  style: subHeaderTextStyle,
+                ),
               ],
             ),
           ],
@@ -130,17 +130,29 @@ class _HomeWidgetState extends StatelessWidget {
 
 
     _clothesRow(DocumentSnapshot doc) => Container(
-      height: 130.0,
       margin: const EdgeInsets.only(
-        top: 25,
-        left: 24,
-        right: 24,
+        top: 30,
+        left: 30,
+        right: 30,
       ),
-      child: new Stack(
+      child: new Column(
         children: <Widget>[
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            /*children: <Widget>[
+              Padding(
+                padding: EdgeInsets.only(bottom: 30),
+                child: Image.network(doc["photo"],fit: BoxFit.contain, height: 200, alignment: Alignment.topCenter, width: double.maxFinite)
+              )
+            ]*/
+           
+           ),
+          
+          //_clothesImage(doc),
           _clothesCard(doc),
-          _clothesImage(doc),
-          _more(),
+          
+          //_more(),
         ],
       )
     );
@@ -156,50 +168,7 @@ class _HomeWidgetState extends StatelessWidget {
         return ListView.builder(
           itemCount: snapshot.data.documents.length,
           itemBuilder: (BuildContext context, int index) {
-            DocumentSnapshot doc = snapshot.data.documents[index];
-            if (doc['uid'] == Authentication.usuarioLogado.uid) {
-              return ListTile(
-                leading: Icon(Icons.pages),
-                title: Text(doc['title']),
-                subtitle: Text(doc['type']),
-                trailing: PopupMenuButton<ListAction>(
-                  itemBuilder: (BuildContext context) {
-                    return <PopupMenuEntry<ListAction>>[
-                      PopupMenuItem<ListAction>(
-                        value: ListAction.deletar,
-                        child: Row(
-                          children: <Widget>[
-                            Icon(FontAwesomeIcons.trashAlt),
-                            Text("  Excluir")
-                          ],
-                        ),
-                      ),
-                      PopupMenuItem<ListAction>(
-                        value: ListAction.editar,
-                        child: Row(
-                          children: <Widget>[
-                            Icon(FontAwesomeIcons.pencilAlt),
-                            Text("  Editar")
-                          ],
-                        ),
-                      )
-                    ];
-                  },
-                  onSelected: (ListAction result) {
-                    switch (result) {
-                      case ListAction.deletar:
-                        doc.reference.delete();
-                        break;
-                      case ListAction.editar:
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (BuildContext context) => NewClothesPage(
-                                )));
-                        break;
-                    }
-                  },
-                ),
-              );
-            } 
+            DocumentSnapshot doc = snapshot.data.documents[index]; 
             return _clothesRow(doc);
               // return ListTile(
               //   leading: Icon(Icons.pages),

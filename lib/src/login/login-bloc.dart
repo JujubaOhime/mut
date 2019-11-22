@@ -30,8 +30,8 @@ class LoginBloc extends BlocBase{
   onClickGoogle() async{
     _controllerLoading.add(true);
     if(await _authentication.signWithGoogle()){
-      Navigator.pushReplacement(context, 
-      MaterialPageRoute(builder: (BuildContext context) => HomeWidget()));
+      
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => HomeWidget()));
     } else{
       _controllerLoading.add(false);
     }

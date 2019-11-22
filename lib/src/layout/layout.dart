@@ -9,7 +9,10 @@ import 'package:mut/src/login/login-bloc.dart';
 import 'package:mut/src/login/login-widget.dart';
 import 'package:mut/src/pages/home-widget.dart';
 import 'package:mut/src/pages/matches.dart';
+import 'package:mut/src/pages/my-clothes.dart' as prefix0;
+import 'package:mut/src/pages/my-clothes.dart';
 import 'package:mut/src/pages/new-clothes.dart';
+import 'package:mut/src/pages/profile.dart';
 import 'package:mut/src/pages/sobre.dart';
 import 'package:mut/src/services/authentication/Authentication.dart';
 
@@ -87,6 +90,22 @@ class Layout {
                 onTap: () {
                   Navigator.of(context).pop();
                   Navigator.of(context).pushNamed(NewClothesPage.tag);
+                },
+              ),
+              ListTile(
+                leading: Icon(FontAwesomeIcons.tshirt, color: Layout.lightBlue()),
+                title: Text("Minhas Roupas"),
+                onTap: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).pushNamed(MyClothes.tag);
+                },
+              ),
+              ListTile(
+                leading: Icon(FontAwesomeIcons.userAlt, color: Layout.lightBlue()),
+                title: Text("Perfil"),
+                onTap: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).pushNamed(ProfilePage.tag);
                 },
               ),
               ListTile(
