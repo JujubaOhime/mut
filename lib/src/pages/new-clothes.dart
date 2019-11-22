@@ -1,7 +1,11 @@
+import 'dart:io';
+
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:mut/src/layout/layout-bloc.dart';
 import 'package:mut/src/layout/layout.dart';
 import 'package:mut/src/services/authentication/Authentication.dart';
@@ -16,6 +20,9 @@ class NewClothesPage extends StatefulWidget {
 }
 
 class _NewClothesState extends State<NewClothesPage> {
+  
+
+
   String size, description, photo, title, type, state;
   String uid; 
   Timestamp time;
@@ -43,6 +50,8 @@ class _NewClothesState extends State<NewClothesPage> {
   getState(state) {
     this.state = state;
   }
+
+  
 
   createData() {
     DocumentReference ds =
@@ -125,6 +134,25 @@ class _NewClothesState extends State<NewClothesPage> {
               },
             ),
           ),
+          Padding(
+            
+            padding: EdgeInsets.only(left: 30.0, right: 30, top: 10),
+            child: FlatButton(
+              color: Colors.blue,
+              textColor: Colors.white,
+              disabledColor: Colors.grey,
+              disabledTextColor: Colors.black,
+              padding: EdgeInsets.all(8.0),
+              splashColor: Colors.blueAccent,
+              onPressed: (){
+
+              },
+              child: Text(
+                "Flat Button",
+                style: TextStyle(fontSize: 20.0),
+              ),
+            )
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
@@ -171,4 +199,5 @@ class _NewClothesState extends State<NewClothesPage> {
       backgroundColor: Layout.lightPink(),
     );
   }
+
 }

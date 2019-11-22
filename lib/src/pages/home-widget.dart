@@ -48,7 +48,7 @@ class _HomeWidgetState extends StatelessWidget {
 
 
     _clothesCard(DocumentSnapshot doc) => Container(
-      height: 380,
+      height: 370,
       child: Container(
         margin: EdgeInsets.fromLTRB(10,0,10,0),
         constraints: BoxConstraints.expand(),
@@ -58,7 +58,7 @@ class _HomeWidgetState extends StatelessWidget {
             Container(height: 3.0),
             Padding(
               
-                padding: EdgeInsets.only(bottom: 20, top: 30, left:20, right: 20),
+                padding: EdgeInsets.only(bottom: 20, top: 25, left:15, right: 15),
                 child: new ClipRRect(
                   borderRadius: new BorderRadius.circular(8.0),
                   child: Image.network(doc["photo"],fit: BoxFit.cover, height: 200, alignment: Alignment.center, width: double.maxFinite)
@@ -74,8 +74,8 @@ class _HomeWidgetState extends StatelessWidget {
             ),
             
             Container(
-                margin: EdgeInsets.symmetric(vertical: 8.0),
-                //height: 2.0,  
+                margin: EdgeInsets.only(top: 5, bottom: 0),
+                height: 2.0,  
                 width: 25.0,
                 color: Layout.lightBlue()),
             Row(
@@ -85,7 +85,7 @@ class _HomeWidgetState extends StatelessWidget {
                   child: Row(children: <Widget>[
                     Image.asset(
                       'assets/ic_distance2.png',
-                      height: 30,
+                      height: 20,
                     ),
                     Container(width: 8.0),
                     Text("95 km", style: regularTextStyle),
