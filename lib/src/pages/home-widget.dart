@@ -134,6 +134,7 @@ class _HomeWidgetState extends StatelessWidget {
         top: 30,
         left: 30,
         right: 30,
+        bottom: 10,
       ),
       child: new Column(
         children: <Widget>[
