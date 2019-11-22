@@ -48,7 +48,7 @@ class _HomeWidgetState extends StatelessWidget {
 
 
     _clothesCard(DocumentSnapshot doc) => Container(
-      height: 370,
+      height: 360,
       child: Container(
         margin: EdgeInsets.fromLTRB(10,0,10,0),
         constraints: BoxConstraints.expand(),
@@ -75,7 +75,7 @@ class _HomeWidgetState extends StatelessWidget {
             
             Container(
                 margin: EdgeInsets.only(top: 5, bottom: 0),
-                height: 2.0,  
+                height: 0,  
                 width: 25.0,
                 color: Layout.lightBlue()),
             Row(

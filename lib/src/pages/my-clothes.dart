@@ -6,6 +6,7 @@ import 'package:mut/src/layout/layout-bloc.dart';
 import 'package:mut/src/layout/layout.dart';
 import 'package:mut/src/login/login-widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:mut/src/pages/edit-clothes.dart';
 import 'package:mut/src/pages/new-clothes.dart';
 import 'package:mut/src/services/authentication/Authentication.dart';
 
@@ -74,7 +75,7 @@ class _MyClothesState extends StatelessWidget {
                         break;
                       case ListAction.editar:
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (BuildContext context) => NewClothesPage(
+                            builder: (BuildContext context) => EditClothesPage(doc: doc,
                                 )));
                         break;
                     }

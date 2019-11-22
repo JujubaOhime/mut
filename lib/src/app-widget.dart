@@ -4,6 +4,7 @@ import 'package:mut/src/login/login-widget.dart';
 
 import 'package:flutter/material.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
+import 'package:mut/src/pages/edit-clothes.dart';
 import 'package:mut/src/pages/home-widget.dart';
 import 'package:mut/src/pages/matches.dart';
 import 'package:mut/src/pages/my-clothes.dart';
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget{
           'newClothes-page': (context) => NewClothesPage(),
           'profile-page': (context) => ProfilePage(),
           'myClothes-page': (context) => MyClothes(),
+          'editClothes-page': (context) => EditClothesPage(),
           //"/screen2": (context) => Screen2(),
           //"/screen3": (context) => Screen3(),
         },
