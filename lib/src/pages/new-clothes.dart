@@ -52,7 +52,7 @@ class _NewClothesState extends State<NewClothesPage> {
     return taskSnapshot.ref.getDownloadURL();
   }
 
-  String size, description, photo, title, type, state, uname;
+  String size, description, photo, title, type, state, uname, phone;
   String uid;
   Timestamp time;
 
@@ -80,6 +80,10 @@ class _NewClothesState extends State<NewClothesPage> {
     this.state = state;
   }
 
+  getPhone(phone){
+    this.phone = phone;
+  }
+
   TextEditingController _csize = TextEditingController();
   TextEditingController _cdescription = TextEditingController();
   TextEditingController _cphoto = TextEditingController();
@@ -88,6 +92,7 @@ class _NewClothesState extends State<NewClothesPage> {
   TextEditingController _cstate = TextEditingController();
   TextEditingController _clatitude = TextEditingController();
   TextEditingController _clongitude = TextEditingController();
+  TextEditingController _cphone = TextEditingController();
   String urlFoto;
 
   _loadingCircle() {
@@ -221,6 +226,26 @@ class _NewClothesState extends State<NewClothesPage> {
               },
             ),
           ),
+           Padding(
+            padding: EdgeInsets.only(left: 30.0, right: 30, top: 10),
+            child: TextField(
+              controller: _cphone,
+              // controller: _taskTimeController,
+              style: TextStyle(color: Layout.white()),
+              decoration: InputDecoration(
+                  labelText: "Contato",
+                  contentPadding: new EdgeInsets.only(bottom: 1),
+                  labelStyle: TextStyle(
+                      color: Layout.white(),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 23,
+                      letterSpacing: 2,
+                      height: 0.85)),
+              onChanged: (String phone) {
+                getPhone(phone);
+              },
+            ),
+          ),
           Padding(
             padding: EdgeInsets.only(left: 30.0, right: 30, top: 10),
             child: Text("Por favor, ative seu gps para recebermos a localização ao salvar", textAlign: TextAlign.center, style: TextStyle(color: Layout.white()),)
@@ -336,6 +361,7 @@ class _NewClothesState extends State<NewClothesPage> {
                                   'state': _cstate.text,
                                   'size': _csize.text,
                                   'type': _ctype.text,
+                                  'phone': _cphone.text,
                                   'description': _cdescription.text,
                                   'photo': photo,
                                   'latitude': latitude,

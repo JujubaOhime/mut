@@ -54,7 +54,8 @@ class _HomeWidgetState extends StatelessWidget {
     );
 
 
-    _clothesCard(DocumentSnapshot doc) => Container(
+    _clothesCard(DocumentSnapshot doc) => 
+    Container(
       height: 360,
       child: Container(
         margin: EdgeInsets.fromLTRB(10,0,10,0),
@@ -66,10 +67,19 @@ class _HomeWidgetState extends StatelessWidget {
             Padding(
               
                 padding: EdgeInsets.only(bottom: 20, top: 25, left:15, right: 15),
-                child: new ClipRRect(
+                child: GestureDetector(
+                   onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (BuildContext context) => ProfileClothes(
+                            clothes: doc,
+                          )));
+                  },
+                   child: new ClipRRect(
                   borderRadius: new BorderRadius.circular(8.0),
                   child: Image.network(doc["photo"],fit: BoxFit.cover, height: 200, alignment: Alignment.center, width: double.maxFinite)
                 )
+                )
+               
                  
             ),
             Center(
@@ -105,6 +115,7 @@ class _HomeWidgetState extends StatelessWidget {
                   doc["size"], 
                   style: subHeaderTextStyle,
                 ),
+                
               ],
             ),
           ],
@@ -167,7 +178,6 @@ class _HomeWidgetState extends StatelessWidget {
           
           //_clothesImage(doc),
           _clothesCard(doc),
-          _more(doc),
           
           //_more(),
         ],

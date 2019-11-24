@@ -24,10 +24,11 @@ class ProfileClothes extends StatelessWidget {
   }
 }
 
-class _ProfileClothesState extends StatelessWidget{
+class _ProfileClothesState extends StatelessWidget {
+  String toTitle(String s) => s[0].toUpperCase() + s.substring(1).toLowerCase();
 
   DocumentSnapshot clothes;
- _ProfileClothesState({Key key, this.clothes}) : super(key: key);
+  _ProfileClothesState({Key key, this.clothes}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -44,18 +45,19 @@ class _ProfileClothesState extends StatelessWidget{
     String type = clothes['type'];
     String size = clothes['size'];
     String uname = clothes['uname'];
-    
+    String phone = clothes['phone'];
+
     print(urlFoto);
 
     displayFoto() {
       if (clothes['photo'] != null) {
         return Container(
-          height: 240,
+          height: 300,
           width: 120,
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(5)),
+              borderRadius: BorderRadius.all(Radius.circular(8)),
               image: DecorationImage(
-                  image: NetworkImage(urlFoto), fit: BoxFit.contain)),
+                  image: NetworkImage(urlFoto), fit: BoxFit.cover)),
         );
       }
       return Container(
@@ -65,16 +67,15 @@ class _ProfileClothesState extends StatelessWidget{
     }
 
     displayString(String label) => Row(
-      children: <Widget>[
-        Expanded(
-          child: Text(
-            clothes[label],
-            style: regularTextStyle,
-          ),
-        ),
-      ],
-    );
-
+          children: <Widget>[
+            Expanded(
+              child: Text(
+                clothes[label],
+                style: TextStyle(color: Layout.white(), fontSize: 20),
+              ),
+            ),
+          ],
+        );
 
     var interesses = Firestore.instance.collection("Interests");
 
@@ -91,7 +92,9 @@ class _ProfileClothesState extends StatelessWidget{
     );
 
     final _showInterest = StreamBuilder(
-      stream: interesses.where("clothes", isEqualTo: clothes.documentID).snapshots(),
+      stream: interesses
+          .where("clothes", isEqualTo: clothes.documentID)
+          .snapshots(),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (!snapshot.hasData)
           return const Center(child: CircularProgressIndicator());
@@ -142,7 +145,6 @@ class _ProfileClothesState extends StatelessWidget{
       },
     );
 
-
     displayMultiLine(String label) => Flexible(
           fit: FlexFit.loose,
           child: Text(
@@ -162,34 +164,72 @@ class _ProfileClothesState extends StatelessWidget{
               height: 15,
             ),
             Padding(
-              padding: EdgeInsets.only(bottom: 20, top: 25, left:15, right: 15) ,
-              child: Text(title)
+                padding:
+                    EdgeInsets.only(bottom: 0, top: 10, left: 15, right: 15),
+                child: Text(toTitle(title),
+                    style: TextStyle(color: Layout.white(), fontSize: 30))),
+            Row(
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.only(bottom: 0, top: 15, left: 15, right: 15) ,
+                  child: Text(
+                    toTitle(type),
+                    style: TextStyle(color: Layout.white(), fontSize: 20),
+                  ),
+                ),
+              ],
             ),
+            Row(
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.only(bottom: 0, top: 15, left: 15, right: 15) ,
+                  child: Text( "Tamanho " + 
+                    size,
+                    style: TextStyle(color: Layout.white(), fontSize: 20),
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: <Widget>[
+                 Container(
+                   padding: EdgeInsets.only(bottom: 0, top: 15, left: 15, right: 15) ,
+                  child: Row(
 
-            if (uname != null) displayString(uname), 
-            //displayString("uid"),
-            displayString("type"),
-            displayString("size"),
+
+
+                    children: <Widget>[
+                    
+                    Image.asset(
+                      'assets/telephone.png',
+                      height: 30,
+                    ),
+                    Container(width: 15,),
+                    
+                    Text(phone, style: TextStyle(color: Layout.white(), fontSize: 20))
+                    //Text("95 km", style: regularTextStyle),
+                  ]),
+                ),
+              ],
+            ),
+            if (uname != null)
+              displayString(uname),
             displayMultiLine("description"),
           ],
         ),
         width: MediaQuery.of(context).size.width - 150,
-        padding: EdgeInsets.only(left: 15),
+        //padding: EdgeInsets.only(left: 15),
       );
     }
 
-
-
-
-
-  final content = Container(
+    final content = Container(
       child: SingleChildScrollView(
-        padding: EdgeInsets.all(15),
+        padding: EdgeInsets.all(25),
         child: ListBody(
-          children: <Widget>[displayFoto(), coluna(),_showInterest],
+          children: <Widget>[displayFoto(), coluna(), _showInterest],
         ),
       ),
     );
-  return Layout.getContent(context, content);
+    return Layout.getContent(context, content);
   }
 }

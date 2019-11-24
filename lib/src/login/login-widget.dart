@@ -13,8 +13,8 @@ class LoginWidget extends StatelessWidget {
         child: Stack(
           fit: StackFit.expand,
           children: <Widget>[
-            Image.network(
-                "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Transgender_Pride_flag.svg/1280px-Transgender_Pride_flag.svg.png",
+            Image.asset(
+                "assets/transFlag.png",
                 fit: BoxFit.cover),
             Container(
               color: Colors.grey[700].withOpacity(0.1),

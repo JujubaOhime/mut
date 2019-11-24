@@ -70,8 +70,8 @@ class Layout {
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     fit: BoxFit.fill,
-                    image: NetworkImage(
-                        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Transgender_Pride_flag.svg/1280px-Transgender_Pride_flag.svg.png"),
+                    image: AssetImage(
+                        "assets/transFlag.png"),
                   ),
                 ),
               ),
