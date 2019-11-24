@@ -158,6 +158,7 @@ class _NewClothesState extends State<NewClothesPage> {
                   labelText: "Título",
                   contentPadding: new EdgeInsets.only(bottom: 1),
                   labelStyle: TextStyle(
+                    fontFamily: 'BalooBhai',
                       color: Layout.white(),
                       fontWeight: FontWeight.bold,
                       fontSize: 23,
@@ -176,6 +177,7 @@ class _NewClothesState extends State<NewClothesPage> {
                   labelText: "Descrição",
                   contentPadding: new EdgeInsets.only(bottom: 1),
                   labelStyle: TextStyle(
+                    fontFamily: 'BalooBhai',
                       color: Layout.white(),
                       fontWeight: FontWeight.bold,
                       fontSize: 23,
@@ -196,6 +198,7 @@ class _NewClothesState extends State<NewClothesPage> {
                   labelText: "Tipo",
                   contentPadding: new EdgeInsets.only(bottom: 1),
                   labelStyle: TextStyle(
+                    fontFamily: 'BalooBhai',
                       color: Layout.white(),
                       fontWeight: FontWeight.bold,
                       fontSize: 23,
@@ -216,6 +219,7 @@ class _NewClothesState extends State<NewClothesPage> {
                   labelText: "Tamanho",
                   contentPadding: new EdgeInsets.only(bottom: 1),
                   labelStyle: TextStyle(
+                    fontFamily: 'BalooBhai',
                       color: Layout.white(),
                       fontWeight: FontWeight.bold,
                       fontSize: 23,
@@ -236,6 +240,7 @@ class _NewClothesState extends State<NewClothesPage> {
                   labelText: "Contato",
                   contentPadding: new EdgeInsets.only(bottom: 1),
                   labelStyle: TextStyle(
+                    fontFamily: 'BalooBhai',
                       color: Layout.white(),
                       fontWeight: FontWeight.bold,
                       fontSize: 23,

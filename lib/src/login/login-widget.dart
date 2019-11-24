@@ -97,7 +97,7 @@ class _LoginContent extends StatelessWidget {
         Padding(padding: EdgeInsets.only(bottom: 30),
         child:Text(
           "MUT",
-          style: TextStyle(fontSize: 48, color: Layout.white(), letterSpacing: 10, fontWeight: FontWeight.bold, ),
+          style: TextStyle(fontSize: 60, color: Layout.white(), letterSpacing: 10, fontWeight: FontWeight.bold, fontFamily: 'BalooBhai' ),
           
         ), ),
         
@@ -109,7 +109,7 @@ class _LoginContent extends StatelessWidget {
         //size: 72,
         //),
         Container(
-          height: 100,
+          height: 80,
         ),
         StreamBuilder(
           stream: bloc.outLoading,

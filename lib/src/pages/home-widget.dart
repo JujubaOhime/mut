@@ -83,10 +83,10 @@ class _HomeWidgetState extends StatelessWidget {
                  
             ),
             Center(
-                child: Text(title(doc['title'].toString()), textAlign: TextAlign.center, style: headerTextStyle)
+                child: Text(title(doc['title'].toString()), textAlign: TextAlign.center, style: TextStyle(fontFamily: 'BalooBhai', fontSize: 26, color: Layout.white()))
             ),
             Padding(
-              padding: EdgeInsets.only(top:15,),
+              padding: EdgeInsets.only(top:6,),
               child: Text(title(doc['type']), style: subHeaderTextStyle),
             ),
             

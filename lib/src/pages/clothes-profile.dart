@@ -167,7 +167,7 @@ class _ProfileClothesState extends StatelessWidget {
                 padding:
                     EdgeInsets.only(bottom: 0, top: 10, left: 15, right: 15),
                 child: Text(toTitle(title),
-                    style: TextStyle(color: Layout.white(), fontSize: 30))),
+                    style: TextStyle(color: Layout.white(), fontSize: 40, fontFamily: 'BalooBhai'))),
             Row(
               children: <Widget>[
                 Container(
