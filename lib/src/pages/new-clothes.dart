@@ -1,9 +1,12 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:location/location.dart';
+import 'package:mut/src/model/LocationData.dart';
 import 'package:mut/src/pages/home-widget.dart';
 import 'package:path/path.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -22,7 +25,9 @@ class NewClothesPage extends StatefulWidget {
 }
 
 class _NewClothesState extends State<NewClothesPage> {
+  
   final _formKey = GlobalKey<FormState>();
+  //Location location = new Location();
 
   File sampleImage;
   String nomeImagem;
@@ -47,7 +52,7 @@ class _NewClothesState extends State<NewClothesPage> {
     return taskSnapshot.ref.getDownloadURL();
   }
 
-  String size, description, photo, title, type, state;
+  String size, description, photo, title, type, state, uname;
   String uid;
   Timestamp time;
 
@@ -81,13 +86,14 @@ class _NewClothesState extends State<NewClothesPage> {
   TextEditingController _ctitle = TextEditingController();
   TextEditingController _ctype = TextEditingController();
   TextEditingController _cstate = TextEditingController();
+  TextEditingController _clatitude = TextEditingController();
+  TextEditingController _clongitude = TextEditingController();
   String urlFoto;
 
   _loadingCircle() {
-      if (uploading) return CircularProgressIndicator();
-      return Container();
-    }
-
+    if (uploading) return CircularProgressIndicator();
+    return Container();
+  }
 
   /*createData() async {
     DocumentReference ds =
@@ -113,6 +119,13 @@ class _NewClothesState extends State<NewClothesPage> {
 
   @override
   Widget build(BuildContext context) {
+    Map<String, double> currentLocation = new Map();
+    StreamSubscription<Map<String, double>> locationSubscription;
+    var location = new Location();
+    String error;
+    double latitude = 0;
+    double longitude = 0;
+    Map<String, double> myLocation;
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: Layout.lightPink()),
@@ -210,57 +223,66 @@ class _NewClothesState extends State<NewClothesPage> {
           ),
           Padding(
             padding: EdgeInsets.only(left: 30.0, right: 30, top: 10),
+            child: Text("Por favor, ative seu gps para recebermos a localização ao salvar", textAlign: TextAlign.center, style: TextStyle(color: Layout.white()),)
+          ),
+          Padding(
+              padding: EdgeInsets.only(left: 30.0, right: 30, top: 10),
               child: this.sampleImage == null
-            ? Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.only(top: 0, bottom: 10),
-                    child: IconButton(
-                    onPressed: () async {
-                      getImage();
-                    },
-                    icon: Icon(FontAwesomeIcons.upload, color: Layout.white(), size: 40,),
-                  )
-                  ),
-                  Container(
-                    //width: 20,
-                  ),
-                  Text(
-                    "Selecione uma imagem",
-                    style: TextStyle(color: Layout.white(), fontSize: 20),
-                    textAlign: TextAlign.center,
-                    overflow: TextOverflow.clip,
-                    maxLines: null,
-                  ),
-                ],
-              )
-            : Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.only( top: 0, bottom: 10),
-                    child: IconButton(
-                    onPressed: () async {
-                      getImage();
-                    },
-                    icon: Icon(FontAwesomeIcons.upload, color: Layout.white(), size: 40,),
-                  )
-                  ),
-                  new Container(
-                    margin: EdgeInsets.only(left: 15, right: 15),
-                    child: Text(
-                    basename(this.sampleImage.path), style: TextStyle(color: Layout.white(), fontSize: 20),
-                    textAlign: TextAlign.center,
-                    overflow: TextOverflow.ellipsis,
-                    softWrap: true,
-                    maxLines: null),
-                  ),
-                  
-                ],
-              )
-              ),
+                  ? Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Padding(
+                            padding: EdgeInsets.only(top: 0, bottom: 10),
+                            child: IconButton(
+                              onPressed: () async {
+                                getImage();
+                              },
+                              icon: Icon(
+                                FontAwesomeIcons.upload,
+                                color: Layout.white(),
+                                size: 40,
+                              ),
+                            )),
+                        Container(
+                            //width: 20,
+                            ),
+                        Text(
+                          "Selecione uma imagem",
+                          style: TextStyle(color: Layout.white(), fontSize: 20),
+                          textAlign: TextAlign.center,
+                          overflow: TextOverflow.clip,
+                          maxLines: null,
+                        ),
+                      ],
+                    )
+                  : Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Padding(
+                            padding: EdgeInsets.only(top: 0, bottom: 10),
+                            child: IconButton(
+                              onPressed: () async {
+                                getImage();
+                              },
+                              icon: Icon(
+                                FontAwesomeIcons.upload,
+                                color: Layout.white(),
+                                size: 40,
+                              ),
+                            )),
+                        new Container(
+                          margin: EdgeInsets.only(left: 15, right: 15),
+                          child: Text(basename(this.sampleImage.path),
+                              style: TextStyle(
+                                  color: Layout.white(), fontSize: 20),
+                              textAlign: TextAlign.center,
+                              overflow: TextOverflow.ellipsis,
+                              softWrap: true,
+                              maxLines: null),
+                        ),
+                      ],
+                    )),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
@@ -287,40 +309,52 @@ class _NewClothesState extends State<NewClothesPage> {
                           margin: const EdgeInsets.only(left: 20),
                           child: new RaisedButton(
                             child: Text(
-                                "Enviar",
-                                style: TextStyle(
-                                    color: Layout.white(), fontSize: 20),
-                              ),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(30))),
-                              color: Layout.lightBlue(),
-                              onPressed: () async {
-                                if(!this.uploading){
-                                  String photo = "";
-                                  uploading: true;
-                                  setState(() {});
-                                   if (sampleImage != null) photo = await uploadPic(context);
-                                   Firestore.instance.collection('Clothes').add({
-                                    'time': DateTime.now(),
-                                    'uid': Authentication.usuarioLogado.uid,
-                                    'title': _ctitle.text,
-                                    'state': _cstate.text,
-                                    'size': _csize.text,
-                                    'type': _ctype.text,
-                                    'description': _cdescription.text,
-                                    'photo': photo
-                                  });
-                                  this.sampleImage = null;
-                                  this.nomeImagem = null;
-                                  /*while (Navigator.canPop(context)) {
+                              "Enviar",
+                              style: TextStyle(
+                                  color: Layout.white(), fontSize: 20),
+                            ),
+                            shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(30))),
+                            color: Layout.lightBlue(),
+                            onPressed: () async {
+                              if (!this.uploading) {
+                                myLocation = await location.getLocation();
+                                latitude = myLocation['latitude'];
+                                longitude = myLocation['longitude'];
+                                String photo = "";
+                                uploading:
+                                true;
+                                //var pos = await location.getLocation();
+                                setState(() {});
+                                if (sampleImage != null)
+                                  photo = await uploadPic(context);
+                                Firestore.instance.collection('Clothes').add({
+                                  'time': DateTime.now(),
+                                  'uid': Authentication.usuarioLogado.uid,
+                                  'title': _ctitle.text,
+                                  'state': _cstate.text,
+                                  'size': _csize.text,
+                                  'type': _ctype.text,
+                                  'description': _cdescription.text,
+                                  'photo': photo,
+                                  'latitude': latitude,
+                                  'longitude': longitude,
+                                  'uname':  Authentication.usuarioLogado.displayName
+                                });
+                                //print(pos);
+                                this.sampleImage = null;
+                                this.nomeImagem = null;
+                                /*while (Navigator.canPop(context)) {
                                     Navigator.of(context).pop();
                                   }
                                   */
-                                  Navigator.of(context).pushReplacement(MaterialPageRoute(
-                                  builder: (BuildContext context) => HomeWidget()));
-                                }
-                                /*
+                                Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            HomeWidget()));
+                              }
+                              /*
                                 DocumentReference ds = Firestore.instance
                                     .collection('Clothes')
                                     .document(title);
@@ -345,11 +379,9 @@ class _NewClothesState extends State<NewClothesPage> {
                                 }
                                 Navigator.of(context).pushReplacement(MaterialPageRoute(
                                 builder: (BuildContext context) => HomeWidget()));*/*/
-                              },
-                              
-                              )
-                              ),
-                              /*
+                            },
+                          )),
+                      /*
                               Container(
                                 height: 30,
                                 margin: EdgeInsets.only(top: 50),

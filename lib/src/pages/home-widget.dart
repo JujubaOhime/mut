@@ -1,13 +1,18 @@
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:latlong/latlong.dart';
+import 'package:location/location.dart';
 import 'package:mut/src/layout/layout-bloc.dart';
 import 'package:mut/src/layout/layout.dart';
 import 'package:mut/src/login/login-widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mut/src/pages/new-clothes.dart';
 import 'package:mut/src/services/authentication/Authentication.dart';
+
+import 'clothes-profile.dart';
 
 enum ListAction {editar, deletar }
 
@@ -29,6 +34,8 @@ class _HomeWidgetState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+  
+    final Distance distance = new Distance();
     final baseTextStyle = const TextStyle(fontFamily: 'Poppins');
     final regularTextStyle = baseTextStyle.copyWith(
         color: Layout.white(),
@@ -88,10 +95,13 @@ class _HomeWidgetState extends StatelessWidget {
                       height: 20,
                     ),
                     Container(width: 8.0),
-                    Text("95 km", style: regularTextStyle),
+                    
+                    Text(distance.as(LengthUnit.Kilometer,
+     new LatLng(doc['latitude'], doc['longitude']),new LatLng(51.519475,7.46694444)).toString() + " km", style: regularTextStyle,)
+                    //Text("95 km", style: regularTextStyle),
                   ]),
                 ),
-                Text( "Tamanho " +
+                Text( "Tam " +
                   doc["size"], 
                   style: subHeaderTextStyle,
                 ),
@@ -115,18 +125,23 @@ class _HomeWidgetState extends StatelessWidget {
     );
 
 
-    _more() => Container(
-      margin: EdgeInsets.fromLTRB(0, 95, 12, 0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: <Widget>[
-          GestureDetector(
-            onTap:(){print("click");},
-            child: Icon(FontAwesomeIcons.ellipsisH),
-          )
-        ],
-      ),
-    );
+    _more(DocumentSnapshot doc) => Container(
+          margin: EdgeInsets.fromLTRB(0, 95, 12, 0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (BuildContext context) => ProfileClothes(
+                            clothes: doc,
+                          )));
+                },
+                child: Icon(FontAwesomeIcons.ellipsisH),
+              )
+            ],
+          ),
+        );
 
 
     _clothesRow(DocumentSnapshot doc) => Container(
@@ -152,6 +167,7 @@ class _HomeWidgetState extends StatelessWidget {
           
           //_clothesImage(doc),
           _clothesCard(doc),
+          _more(doc),
           
           //_more(),
         ],
@@ -169,13 +185,8 @@ class _HomeWidgetState extends StatelessWidget {
         return ListView.builder(
           itemCount: snapshot.data.documents.length,
           itemBuilder: (BuildContext context, int index) {
-            DocumentSnapshot doc = snapshot.data.documents[index]; 
+            DocumentSnapshot doc = snapshot.data.documents[index];
             return _clothesRow(doc);
-              // return ListTile(
-              //   leading: Icon(Icons.pages),
-              //   title: Text(doc['nome']),
-              //   subtitle: Text(doc['raca']),
-              // );
             
           },
         );
@@ -186,6 +197,4 @@ class _HomeWidgetState extends StatelessWidget {
     return Layout.getContent(context, content);
   }
 
-  //@override
-  //_HomeWidgetState createState() => _HomeWidgetState();
 }

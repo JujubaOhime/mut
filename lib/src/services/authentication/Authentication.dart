@@ -4,6 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:async';
 
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:location/location.dart';
+import 'package:mut/src/model/User.dart';
 
 class Authentication {
   final FirebaseAuth _firebase = FirebaseAuth.instance;
@@ -21,16 +23,34 @@ class Authentication {
       );
       Authentication.usuarioLogado = usarioAutenticado;
 
-      
+      var location = new Location();
+      double latitude = 0;
+      double longitude = 0;
+      Map<String, double> myLocation;
+      myLocation = await location.getLocation();
+      latitude = myLocation['latitude'];
+      longitude = myLocation['longitude'];
+
+      double getLatitude(){
+        return myLocation['latitude'];
+      }
+
+      double getLongitude(){
+        return myLocation['longitude'];
+      }
+
       String name, email, photo;
       email = Authentication.usuarioLogado.email;
       DocumentReference ds = Firestore.instance.collection('User').document(email);
       Map<String, dynamic> users = {
+        "latitude": latitude,
+        "longitude": longitude,
         "email": Authentication.usuarioLogado.email,
         "photo": Authentication.usuarioLogado.photoUrl,
         "name": Authentication.usuarioLogado.displayName,
         "uid": Authentication.usuarioLogado.uid,
       };
+      
       ds.setData(users).whenComplete((){
         print("usuário atualizado");
       });

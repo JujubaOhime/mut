@@ -3,5 +3,6 @@ class User {
   String nome;
   String phone;
   String descricao = '';
-  
+  double latitude;
+  double longitude;
 }

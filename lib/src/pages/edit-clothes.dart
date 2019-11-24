@@ -4,6 +4,7 @@ import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:location/location.dart';
 import 'package:mut/src/pages/home-widget.dart';
 import 'package:path/path.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -89,6 +90,7 @@ class _EditClothesPage extends State<EditClothesPage> {
   TextEditingController _ctitle = TextEditingController();
   TextEditingController _ctype = TextEditingController();
   TextEditingController _cstate = TextEditingController();
+
   String urlFoto;
 
   _loadingCircle() {
@@ -132,11 +134,17 @@ class _EditClothesPage extends State<EditClothesPage> {
       iniciado = true;
     }
 
+    var location = new Location();
+    String error;
+    double latitude = 0;
+    double longitude = 0;
+    Map<String, double> myLocation;
+
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: Layout.lightPink()),
         backgroundColor: Layout.white(),
-        title: Text("Nova Roupa", style: TextStyle(color: Layout.lightPink())),
+        title: Text("Editar Roupa", style: TextStyle(color: Layout.lightPink())),
         centerTitle: true,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(bottom: Radius.circular(30))),
@@ -229,6 +237,10 @@ class _EditClothesPage extends State<EditClothesPage> {
           ),
           Padding(
             padding: EdgeInsets.only(left: 30.0, right: 30, top: 10),
+            child: Text("Por favor, ative seu gps para recebermos a localização ao salvar", textAlign: TextAlign.center, style: TextStyle(color: Layout.white()),)
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 30.0, right: 30, top: 10),
               child: this.sampleImage == null
             ? Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -316,6 +328,9 @@ class _EditClothesPage extends State<EditClothesPage> {
                               color: Layout.lightBlue(),
                               onPressed: () async {
                                 if(!this.uploading){
+                                  myLocation = await location.getLocation();
+                                  latitude = myLocation['latitude'];
+                                  longitude = myLocation['longitude'];
                                   String photo = "";
                                   uploading: true;
                                   setState(() {});
@@ -331,7 +346,10 @@ class _EditClothesPage extends State<EditClothesPage> {
                                     'size': _csize.text,
                                     'type': _ctype.text,
                                     'description': _cdescription.text,
-                                    'photo': photo
+                                    'photo': photo,
+                                    'latitude': latitude,
+                                    'longitude': longitude, 
+                                    'uname':  Authentication.usuarioLogado.displayName
                                   });
                                   this.sampleImage = null;
                                   this.nomeImagem = null;
