@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:bloc_pattern/bloc_pattern.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -100,13 +101,24 @@ class Layout {
                   Navigator.of(context).pushNamed(MyClothes.tag);
                 },
               ),
-              ListTile(
-                leading: Icon(FontAwesomeIcons.userAlt, color: Layout.lightBlue()),
-                title: Text("Perfil"),
-                onTap: () {
-                  Navigator.of(context).pop();
-                  Navigator.of(context).pushNamed(ProfilePage.tag);
-                },
+              StreamBuilder(
+                 stream: Firestore.instance.collection('User')
+                    .where("uid", isEqualTo: Authentication.usuarioLogado.uid)
+                    .snapshots(),
+                     builder: (BuildContext context, AsyncSnapshot snapshot) {
+                       if (!snapshot.hasData) return const Text('Carregando.....');
+                       return ListTile(
+                          leading: Icon(FontAwesomeIcons.userAlt, color: Layout.lightBlue()),
+                          title: Text("Perfil"),
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (BuildContext context) => ProfilePage(
+                                    user: snapshot.data.documents[0],
+                                  )));
+                          }
+                       );
+                     }
+                  
               ),
               ListTile(
                 leading: Icon(FontAwesomeIcons.infoCircle, color: Layout.lightBlue()),

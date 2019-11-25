@@ -13,6 +13,7 @@ import 'home-widget.dart';
 class ProfileClothes extends StatelessWidget {
   DocumentSnapshot clothes;
   ProfileClothes({Key key, this.clothes}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider<LayoutBloc>(
@@ -177,15 +178,6 @@ class _ProfileClothesState extends StatelessWidget {
       },
     );
 
-    displayMultiLine(String label) => Flexible(
-          fit: FlexFit.loose,
-          child: Text(
-            "Descrição: " + clothes[label],
-            style: TextStyle(color: Layout.white(), fontSize: 20),
-            overflow: TextOverflow.clip,
-            textDirection: TextDirection.ltr,
-          ),
-        );
 
     coluna() {
       return Container(
