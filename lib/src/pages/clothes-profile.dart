@@ -82,7 +82,10 @@ class _ProfileClothesState extends StatelessWidget {
     final interestButton = GestureDetector(
       child: Align(
         alignment: Alignment.topRight,
-        child: Image.asset('assets/like.png', width: 40,),
+        child: Image.asset(
+          'assets/like.png',
+          width: 40,
+        ),
       ),
       onTap: () {
         interesses.add({
@@ -97,7 +100,10 @@ class _ProfileClothesState extends StatelessWidget {
     final desinterestButton = GestureDetector(
       child: Align(
         alignment: Alignment.topRight,
-        child: Image.asset('assets/like.png', width: 40,),
+        child: Image.asset(
+          'assets/like.png',
+          width: 40,
+        ),
       ),
       onTap: () {
         interesses.add({
@@ -159,23 +165,22 @@ class _ProfileClothesState extends StatelessWidget {
                 return interestButton;
               else
                 return Align(
-                  alignment: Alignment.topRight,
-                  child:GestureDetector(
-                     onTap: () {
-                       
-                     },
-                     child: Image.asset('assets/liked.png', width: 40,),
-                     )
-
-                  );
+                    alignment: Alignment.topRight,
+                    child: GestureDetector(
+                      onTap: () {},
+                      child: Image.asset(
+                        'assets/liked.png',
+                        width: 40,
+                      ),
+                    ));
             });
       },
     );
 
     displayMultiLine(String label) => Flexible(
           fit: FlexFit.loose,
-          child: Text( "Descrição: " + 
-            clothes[label],
+          child: Text(
+            "Descrição: " + clothes[label],
             style: TextStyle(color: Layout.white(), fontSize: 20),
             overflow: TextOverflow.clip,
             textDirection: TextDirection.ltr,
@@ -194,11 +199,15 @@ class _ProfileClothesState extends StatelessWidget {
                 padding:
                     EdgeInsets.only(bottom: 0, top: 10, left: 15, right: 15),
                 child: Text(toTitle(title),
-                    style: TextStyle(color: Layout.white(), fontSize: 40, fontFamily: 'BalooBhai'))),
+                    style: TextStyle(
+                        color: Layout.white(),
+                        fontSize: 40,
+                        fontFamily: 'BalooBhai'))),
             Row(
               children: <Widget>[
                 Container(
-                  padding: EdgeInsets.only(bottom: 0, top: 0, left: 15, right: 15) ,
+                  padding:
+                      EdgeInsets.only(bottom: 0, top: 0, left: 15, right: 15),
                   child: Text(
                     toTitle(type),
                     style: TextStyle(color: Layout.white(), fontSize: 20),
@@ -209,9 +218,10 @@ class _ProfileClothesState extends StatelessWidget {
             Row(
               children: <Widget>[
                 Container(
-                  padding: EdgeInsets.only(bottom: 0, top: 15, left: 15, right: 15) ,
-                  child: Text( "Tamanho " + 
-                    size,
+                  padding:
+                      EdgeInsets.only(bottom: 0, top: 15, left: 15, right: 15),
+                  child: Text(
+                    "Tamanho " + size,
                     style: TextStyle(color: Layout.white(), fontSize: 20),
                   ),
                 ),
@@ -219,41 +229,46 @@ class _ProfileClothesState extends StatelessWidget {
             ),
             Row(
               children: <Widget>[
-                 Container(
-                   padding: EdgeInsets.only(bottom: 15, top: 15, left: 15, right: 15) ,
-                  child: Row(
-                    children: <Widget>[
-                    
+                Container(
+                  padding:
+                      EdgeInsets.only(bottom: 15, top: 15, left: 15, right: 15),
+                  child: Row(children: <Widget>[
                     Image.asset(
                       'assets/telephone.png',
                       height: 30,
                     ),
-                    Container(width: 15,),
-                    
-                    Text(phone, style: TextStyle(color: Layout.white(), fontSize: 20))
+                    Container(
+                      width: 15,
+                    ),
+
+                    Text(phone,
+                        style: TextStyle(color: Layout.white(), fontSize: 20))
                     //Text("95 km", style: regularTextStyle),
                   ]),
                 ),
               ],
             ),
-             Row(
+            Row(
               children: <Widget>[
                 Container(
-                  padding: EdgeInsets.only(bottom: 0, top: 0, left: 15, right: 0) ,
-                  alignment: Alignment.topLeft,
-                   width: MediaQuery.of(context).size.width*0.85,
-                  child: Column(children: <Widget>[
-                    
-                    Text( "Descrição: " + 
-                    description, maxLines: null,
-                    style: TextStyle(color: Layout.white(), fontSize: 20), textAlign: TextAlign.left,),
-                  ],)
-                  
-                ),
+                    padding:
+                        EdgeInsets.only(bottom: 0, top: 0, left: 15, right: 0),
+                    alignment: Alignment.topLeft,
+                    width: MediaQuery.of(context).size.width * 0.85,
+                    child: Column(
+                      children: <Widget>[
+                        Text(
+                          "Descrição: " + description,
+                          maxLines: null,
+                          style: TextStyle(color: Layout.white(), fontSize: 20),
+                          textAlign: TextAlign.left,
+                        ),
+                      ],
+                    )),
               ],
             ),
-            if (uname != null)
-              displayString(uname),
+            //if (uname != null)
+            //  displayString(uname),
           ],
         ),
         width: MediaQuery.of(context).size.width - 150,

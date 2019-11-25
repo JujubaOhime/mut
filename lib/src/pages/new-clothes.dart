@@ -25,7 +25,6 @@ class NewClothesPage extends StatefulWidget {
 }
 
 class _NewClothesState extends State<NewClothesPage> {
-  
   final _formKey = GlobalKey<FormState>();
   //Location location = new Location();
 
@@ -80,7 +79,7 @@ class _NewClothesState extends State<NewClothesPage> {
     this.state = state;
   }
 
-  getPhone(phone){
+  getPhone(phone) {
     this.phone = phone;
   }
 
@@ -158,7 +157,7 @@ class _NewClothesState extends State<NewClothesPage> {
                   labelText: "Título",
                   contentPadding: new EdgeInsets.only(bottom: 1),
                   labelStyle: TextStyle(
-                    fontFamily: 'BalooBhai',
+                      fontFamily: 'BalooBhai',
                       color: Layout.white(),
                       fontWeight: FontWeight.bold,
                       fontSize: 23,
@@ -177,7 +176,7 @@ class _NewClothesState extends State<NewClothesPage> {
                   labelText: "Descrição",
                   contentPadding: new EdgeInsets.only(bottom: 1),
                   labelStyle: TextStyle(
-                    fontFamily: 'BalooBhai',
+                      fontFamily: 'BalooBhai',
                       color: Layout.white(),
                       fontWeight: FontWeight.bold,
                       fontSize: 23,
@@ -198,7 +197,7 @@ class _NewClothesState extends State<NewClothesPage> {
                   labelText: "Tipo",
                   contentPadding: new EdgeInsets.only(bottom: 1),
                   labelStyle: TextStyle(
-                    fontFamily: 'BalooBhai',
+                      fontFamily: 'BalooBhai',
                       color: Layout.white(),
                       fontWeight: FontWeight.bold,
                       fontSize: 23,
@@ -219,7 +218,7 @@ class _NewClothesState extends State<NewClothesPage> {
                   labelText: "Tamanho",
                   contentPadding: new EdgeInsets.only(bottom: 1),
                   labelStyle: TextStyle(
-                    fontFamily: 'BalooBhai',
+                      fontFamily: 'BalooBhai',
                       color: Layout.white(),
                       fontWeight: FontWeight.bold,
                       fontSize: 23,
@@ -230,7 +229,7 @@ class _NewClothesState extends State<NewClothesPage> {
               },
             ),
           ),
-           Padding(
+          Padding(
             padding: EdgeInsets.only(left: 30.0, right: 30, top: 10),
             child: TextField(
               controller: _cphone,
@@ -240,7 +239,7 @@ class _NewClothesState extends State<NewClothesPage> {
                   labelText: "Contato",
                   contentPadding: new EdgeInsets.only(bottom: 1),
                   labelStyle: TextStyle(
-                    fontFamily: 'BalooBhai',
+                      fontFamily: 'BalooBhai',
                       color: Layout.white(),
                       fontWeight: FontWeight.bold,
                       fontSize: 23,
@@ -250,10 +249,6 @@ class _NewClothesState extends State<NewClothesPage> {
                 getPhone(phone);
               },
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(left: 30.0, right: 30, top: 10),
-            child: Text("Por favor, ative seu gps para recebermos a localização ao salvar", textAlign: TextAlign.center, style: TextStyle(color: Layout.white()),)
           ),
           Padding(
               padding: EdgeInsets.only(left: 30.0, right: 30, top: 10),
@@ -371,7 +366,8 @@ class _NewClothesState extends State<NewClothesPage> {
                                   'photo': photo,
                                   'latitude': latitude,
                                   'longitude': longitude,
-                                  'uname':  Authentication.usuarioLogado.displayName
+                                  'uname':
+                                      Authentication.usuarioLogado.displayName
                                 });
                                 //print(pos);
                                 this.sampleImage = null;
