@@ -79,9 +79,27 @@ class _ProfileClothesState extends StatelessWidget {
 
     var interesses = Firestore.instance.collection("Interests");
 
-    final interestButton = RaisedButton(
-      child: Text("Demonstrar Interesse"),
-      onPressed: () {
+    final interestButton = GestureDetector(
+      child: Align(
+        alignment: Alignment.topRight,
+        child: Image.asset('assets/like.png', width: 40,),
+      ),
+      onTap: () {
+        interesses.add({
+          "uid": Authentication.usuarioLogado.uid,
+          "uemail": Authentication.usuarioLogado.email,
+          "uname": Authentication.usuarioLogado.displayName,
+          "clothes": clothes.documentID,
+        });
+      },
+    );
+
+    final desinterestButton = GestureDetector(
+      child: Align(
+        alignment: Alignment.topRight,
+        child: Image.asset('assets/like.png', width: 40,),
+      ),
+      onTap: () {
         interesses.add({
           "uid": Authentication.usuarioLogado.uid,
           "uemail": Authentication.usuarioLogado.email,
@@ -140,16 +158,18 @@ class _ProfileClothesState extends StatelessWidget {
               if (snapshot.data.documents.length == 0)
                 return interestButton;
               else
-                return Center(child: Text("Você ja demonstrou interesse"));
+                return Align(
+                  alignment: Alignment.topRight,
+                  child: Image.asset('assets/liked.png', width: 40,));
             });
       },
     );
 
     displayMultiLine(String label) => Flexible(
           fit: FlexFit.loose,
-          child: Text(
+          child: Text( "Descrição: " + 
             clothes[label],
-            style: regularTextStyle,
+            style: TextStyle(color: Layout.white(), fontSize: 20),
             overflow: TextOverflow.clip,
             textDirection: TextDirection.ltr,
           ),
@@ -171,7 +191,7 @@ class _ProfileClothesState extends StatelessWidget {
             Row(
               children: <Widget>[
                 Container(
-                  padding: EdgeInsets.only(bottom: 0, top: 15, left: 15, right: 15) ,
+                  padding: EdgeInsets.only(bottom: 0, top: 0, left: 15, right: 15) ,
                   child: Text(
                     toTitle(type),
                     style: TextStyle(color: Layout.white(), fontSize: 20),
@@ -193,11 +213,8 @@ class _ProfileClothesState extends StatelessWidget {
             Row(
               children: <Widget>[
                  Container(
-                   padding: EdgeInsets.only(bottom: 0, top: 15, left: 15, right: 15) ,
+                   padding: EdgeInsets.only(bottom: 15, top: 15, left: 15, right: 15) ,
                   child: Row(
-
-
-
                     children: <Widget>[
                     
                     Image.asset(
@@ -212,9 +229,24 @@ class _ProfileClothesState extends StatelessWidget {
                 ),
               ],
             ),
+             Row(
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.only(bottom: 0, top: 0, left: 15, right: 0) ,
+                  alignment: Alignment.topLeft,
+                   width: MediaQuery.of(context).size.width*0.85,
+                  child: Column(children: <Widget>[
+                    
+                    Text( "Descrição: " + 
+                    description, maxLines: null,
+                    style: TextStyle(color: Layout.white(), fontSize: 20), textAlign: TextAlign.left,),
+                  ],)
+                  
+                ),
+              ],
+            ),
             if (uname != null)
               displayString(uname),
-            displayMultiLine("description"),
           ],
         ),
         width: MediaQuery.of(context).size.width - 150,
