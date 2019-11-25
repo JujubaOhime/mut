@@ -160,7 +160,14 @@ class _ProfileClothesState extends StatelessWidget {
               else
                 return Align(
                   alignment: Alignment.topRight,
-                  child: Image.asset('assets/liked.png', width: 40,));
+                  child:GestureDetector(
+                     onTap: () {
+                       
+                     },
+                     child: Image.asset('assets/liked.png', width: 40,),
+                     )
+
+                  );
             });
       },
     );

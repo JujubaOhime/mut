@@ -196,8 +196,7 @@ class _HomeWidgetState extends StatelessWidget {
           itemCount: snapshot.data.documents.length,
           itemBuilder: (BuildContext context, int index) {
             DocumentSnapshot doc = snapshot.data.documents[index];
-            return _clothesRow(doc);
-            
+            return _clothesRow(doc); 
           },
         );
       },
