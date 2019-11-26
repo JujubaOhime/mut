@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:geocoder/geocoder.dart';
 import 'package:latlong/latlong.dart';
 import 'package:mut/src/layout/layout-bloc.dart';
 import 'package:mut/src/layout/layout.dart';
@@ -133,10 +134,10 @@ class _ProfileState extends StatelessWidget {
 
     _clothesRow(DocumentSnapshot doc) => Container(
         margin: const EdgeInsets.only(
-          top: 30,
+          top: 20,
           left: 30,
           right: 30,
-          bottom: 10,
+          bottom: 0,
         ),
         child: new Column(
           children: <Widget>[
@@ -197,7 +198,13 @@ class _ProfileState extends StatelessWidget {
             padding: EdgeInsets.only(bottom: 10),
             child: Text(user['email'],
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 20, color: Layout.white()))),
+                style: TextStyle(fontSize: 18, color: Layout.white()))),
+        Container(
+            width: MediaQuery.of(context).size.width,
+            padding: EdgeInsets.only(bottom: 10),
+            child: Text(user['state'] + " - " + user['city'],
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 18, color: Layout.white()))),
         Expanded(
           child: StreamBuilder(
           stream: Firestore.instance

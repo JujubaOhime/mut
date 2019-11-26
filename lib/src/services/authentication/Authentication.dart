@@ -1,6 +1,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:geocoder/geocoder.dart';
 import 'dart:async';
 
 import 'package:google_sign_in/google_sign_in.dart';
@@ -30,6 +31,11 @@ class Authentication {
       myLocation = await location.getLocation();
       latitude = myLocation['latitude'];
       longitude = myLocation['longitude'];
+      final coordinates = new Coordinates(latitude, longitude);
+      var addresses = await Geocoder.local.findAddressesFromCoordinates(coordinates);
+      var first = addresses.first;
+      String state = first.adminArea;
+      String city = first.subAdminArea;
 
       double getLatitude(){
         return myLocation['latitude'];
@@ -49,6 +55,8 @@ class Authentication {
         "photo": Authentication.usuarioLogado.photoUrl,
         "name": Authentication.usuarioLogado.displayName,
         "uid": Authentication.usuarioLogado.uid,
+        "state": state,
+        "city": city,
       };
       
       ds.setData(users).whenComplete((){
