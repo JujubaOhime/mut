@@ -105,15 +105,10 @@ class _ProfileClothesState extends StatelessWidget {
           .where("clothes", isEqualTo: clothes.documentID)
           .snapshots(),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
-        if (!snapshot.hasData)
-          return const Center(child: CircularProgressIndicator());
         if (id == Authentication.usuarioLogado.uid) {
           if (snapshot.data.documents.length == 0) {
             return const Center(
-              child: Text(
-                "Você não tem ninguem interessado",
-                style: TextStyle(fontFamily: 'Poppins', fontSize: 15),
-              ),
+              
             );
           }
           return ListView.builder(
@@ -125,14 +120,6 @@ class _ProfileClothesState extends StatelessWidget {
               return Container(
                 child: Column(
                   children: <Widget>[
-                    //Text("Interessados"),
-                    /*
-                    Row(
-                      children: <Widget>[
-                        Text(doc["uname"]),
-                        
-                      ],
-                    ),*/
                   ],
                 ),
               );

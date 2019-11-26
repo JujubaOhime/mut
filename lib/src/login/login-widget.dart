@@ -49,7 +49,6 @@ class _LoginContent extends StatelessWidget {
                 elevation: 5.0,
                 child: Text("Confirmar"),
                 onPressed: () {
-                  //onChanged: bloc.phoneEvent.add;
                   Navigator.of(context).pop(customController.text.toString());
                 },
               )
@@ -73,7 +72,6 @@ class _LoginContent extends StatelessWidget {
               label: Text("Login com Telefone"),
               onPressed: () {
                 createAlertDialog(context).then((onValue) {
-                  //onChanged: bloc.phoneEvent.add;
                   print(onValue);
                   bloc.onClickTelefone2(onValue);
                 });
@@ -84,7 +82,7 @@ class _LoginContent extends StatelessWidget {
             color: Colors.red,
             textColor: Colors.white,
             icon: Icon(FontAwesomeIcons.google),
-            label: Text("Login com Google    "),
+            label: Text("Login com Google    fc"),
             onPressed: bloc.onClickGoogle,
           ),
         ],
@@ -105,9 +103,6 @@ class _LoginContent extends StatelessWidget {
           'assets/trans.png',
           height: 150,
         ),
-        //FlutterLogo(
-        //size: 72,
-        //),
         Container(
           height: 80,
         ),
