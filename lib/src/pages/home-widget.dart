@@ -33,31 +33,8 @@ class HomeWidget extends StatelessWidget {
 class _HomeWidgetState extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    double latitude, longitue;
-
-    //DocumentSnapshot docc = query.data.documents
-
     final Distance distance = new Distance();
-    final baseTextStyle = const TextStyle(fontFamily: 'Poppins');
-    final regularTextStyle = baseTextStyle.copyWith(
-      color: Layout.white(),
-      fontSize: 14.0,
-      fontWeight: FontWeight.w400,
-    );
-    final subHeaderTextStyle = regularTextStyle.copyWith(fontSize: 17.0);
-    final headerTextStyle = baseTextStyle.copyWith(
-      color: Colors.white,
-      fontSize: 25.0,
-      fontWeight: FontWeight.w600,
-    );
 
-    _clothesImage(DocumentSnapshot doc) => Container(
-          margin: const EdgeInsets.only(bottom: 30),
-          alignment: Alignment.center,
-          height: 150.0,
-          width: 80.0,
-          child: Image.network(doc["photo"], fit: BoxFit.cover),
-        );
 
     _clothesCard(DocumentSnapshot doc, DocumentSnapshot doc2) => Container(
           height: 360,
@@ -96,7 +73,7 @@ class _HomeWidgetState extends StatelessWidget {
                   padding: EdgeInsets.only(
                     top: 6,
                   ),
-                  child: Text(title(doc['type']), style: subHeaderTextStyle),
+                  child: Text(title(doc['type']), style: TextStyle(color: Layout.white(), fontSize: 17)),
                 ),
                 Container(
                     margin: EdgeInsets.only(top: 5, bottom: 0),
@@ -124,14 +101,13 @@ class _HomeWidgetState extends StatelessWidget {
                                           doc2['latitude'], doc2['longitude']))
                                   .toString() +
                               " km",
-                          style: regularTextStyle,
+                          style: TextStyle(color: Layout.white(), fontSize: 14),
                         )
-                        //Text("95 km", style: regularTextStyle),
                       ]),
                     ),
                     Text(
                       "Tam " + doc["size"],
-                      style: subHeaderTextStyle,
+                      style: TextStyle(color: Layout.white(), fontSize: 17),
                     ),
                   ],
                 ),
@@ -152,23 +128,6 @@ class _HomeWidgetState extends StatelessWidget {
           ),
         );
 
-    _more(DocumentSnapshot doc) => Container(
-          margin: EdgeInsets.fromLTRB(0, 95, 12, 0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: <Widget>[
-              GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext context) => ProfileClothes(
-                            clothes: doc,
-                          )));
-                },
-                child: Icon(FontAwesomeIcons.ellipsisH),
-              )
-            ],
-          ),
-        );
 
     _clothesRow(DocumentSnapshot doc, DocumentSnapshot doc2) => Container(
         margin: const EdgeInsets.only(
@@ -182,18 +141,9 @@ class _HomeWidgetState extends StatelessWidget {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
-              /*children: <Widget>[
-              Padding(
-                padding: EdgeInsets.only(bottom: 30),
-                child: Image.network(doc["photo"],fit: BoxFit.contain, height: 200, alignment: Alignment.topCenter, width: double.maxFinite)
-              )
-            ]*/
             ),
-
-            //_clothesImage(doc),
             _clothesCard(doc, doc2),
 
-            //_more(),
           ],
         ));
 
@@ -217,7 +167,7 @@ class _HomeWidgetState extends StatelessWidget {
                   if (!snapshot.hasData)
                     return const Center(child: CircularProgressIndicator());
                   return _clothesRow(doc, snapshot.data.documents[0]);
-                }); //clothesRow(doc);
+                }); 
           },
         );
       },

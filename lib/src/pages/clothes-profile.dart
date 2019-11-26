@@ -33,11 +33,6 @@ class _ProfileClothesState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final baseTextStyle = const TextStyle(fontFamily: 'Poppins');
-    final regularTextStyle = baseTextStyle.copyWith(
-        color: Layout.font(), fontSize: 20.0, fontWeight: FontWeight.w400);
-    final headerTextStyle = baseTextStyle.copyWith(
-        color: Layout.font(), fontSize: 25.0, fontWeight: FontWeight.w600);
 
     String id = clothes["uid"];
     String urlFoto = clothes['photo'];
@@ -66,17 +61,6 @@ class _ProfileClothesState extends StatelessWidget {
         width: 120,
       );
     }
-
-    displayString(String label) => Row(
-          children: <Widget>[
-            Expanded(
-              child: Text(
-                clothes[label],
-                style: TextStyle(color: Layout.white(), fontSize: 20),
-              ),
-            ),
-          ],
-        );
 
     var interesses = Firestore.instance.collection("Interests");
 
@@ -236,7 +220,6 @@ class _ProfileClothesState extends StatelessWidget {
 
                     Text(phone,
                         style: TextStyle(color: Layout.white(), fontSize: 20))
-                    //Text("95 km", style: regularTextStyle),
                   ]),
                 ),
               ],
@@ -260,12 +243,9 @@ class _ProfileClothesState extends StatelessWidget {
                     )),
               ],
             ),
-            //if (uname != null)
-            //  displayString(uname),
           ],
         ),
         width: MediaQuery.of(context).size.width - 150,
-        //padding: EdgeInsets.only(left: 15),
       );
     }
 

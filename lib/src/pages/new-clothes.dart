@@ -99,27 +99,6 @@ class _NewClothesState extends State<NewClothesPage> {
     return Container();
   }
 
-  /*createData() async {
-    DocumentReference ds =
-        Firestore.instance.collection('Clothes').document(title);
-    String photo = "";
-    uploading = true;
-    if (sampleImage != null) photo = await uploadPic(context);
-    Map<String, dynamic> clothes = {
-      "photo": photo,
-      "size": size,
-      "type": type,
-      "title": title,
-      "uid": Authentication.usuarioLogado.uid,
-      "description": description,
-      "time": DateTime.now(),
-      "state": "Rio de Janeiro",
-    };
-
-    ds.setData(clothes).whenComplete(() {
-      print("roupa atualizada");
-    });
-  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -191,7 +170,6 @@ class _NewClothesState extends State<NewClothesPage> {
             padding: EdgeInsets.only(left: 30.0, right: 30.0, top: 10),
             child: TextField(
               controller: _ctype,
-              // controller: _taskDateController,
               style: TextStyle(color: Layout.white()),
               decoration: InputDecoration(
                   labelText: "Tipo",
@@ -212,7 +190,6 @@ class _NewClothesState extends State<NewClothesPage> {
             padding: EdgeInsets.only(left: 30.0, right: 30, top: 10),
             child: TextField(
               controller: _csize,
-              // controller: _taskTimeController,
               style: TextStyle(color: Layout.white()),
               decoration: InputDecoration(
                   labelText: "Tamanho",
@@ -233,7 +210,6 @@ class _NewClothesState extends State<NewClothesPage> {
             padding: EdgeInsets.only(left: 30.0, right: 30, top: 10),
             child: TextField(
               controller: _cphone,
-              // controller: _taskTimeController,
               style: TextStyle(color: Layout.white()),
               decoration: InputDecoration(
                   labelText: "Telefone",
@@ -372,49 +348,13 @@ class _NewClothesState extends State<NewClothesPage> {
                                 //print(pos);
                                 this.sampleImage = null;
                                 this.nomeImagem = null;
-                                /*while (Navigator.canPop(context)) {
-                                    Navigator.of(context).pop();
-                                  }
-                                  */
                                 Navigator.of(context).pushReplacement(
                                     MaterialPageRoute(
                                         builder: (BuildContext context) =>
                                             HomeWidget()));
                               }
-                              /*
-                                DocumentReference ds = Firestore.instance
-                                    .collection('Clothes')
-                                    .document(title);
-                                String photo = "";
-                                uploading = true;
-                                if (sampleImage != null)
-                                  photo = await uploadPic(context);
-                                Map<String, dynamic> clothes = {
-                                  "photo": photo,
-                                  "size": size,
-                                  "type": type,
-                                  "title": title,
-                                  "uid": Authentication.usuarioLogado.uid,
-                                  "description": description,
-                                  "time": DateTime.now(),
-                                  "state": "Rio de Janeiro",
-                                };
-                                this.sampleImage = null;
-                                this.nomeImagem = null;
-                                /*while (Navigator.canPop(context)) {
-                                  Navigator.of(context).pop();
-                                }
-                                Navigator.of(context).pushReplacement(MaterialPageRoute(
-                                builder: (BuildContext context) => HomeWidget()));*/*/
                             },
                           )),
-                      /*
-                              Container(
-                                height: 30,
-                                margin: EdgeInsets.only(top: 50),
-                                child: Center(child: _loadingCircle()),
-                              ),*/
-                      // This button results in adding the contact to the database
                     ],
                   )),
             ],

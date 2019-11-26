@@ -106,7 +106,6 @@ class _ProfileState extends StatelessWidget {
                               " km",
                           style: TextStyle(color: Layout.white(), fontSize: 14),
                         )
-                        //Text("95 km", style: regularTextStyle),
                       ]),
                     ),
                     Text(
@@ -144,30 +143,12 @@ class _ProfileState extends StatelessWidget {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
-              /*children: <Widget>[
-              Padding(
-                padding: EdgeInsets.only(bottom: 30),
-                child: Image.network(doc["photo"],fit: BoxFit.contain, height: 200, alignment: Alignment.topCenter, width: double.maxFinite)
-              )
-            ]*/
             ),
-
-            //_clothesImage(doc),
             _clothesCard(doc),
-
-            //_more(),
           ],
         ));
 
     final content = Column(
-      //direction: Axis.vertical,
-      //textDirection: TextDirection.ltr,
-
-      //mainAxisSize: MainAxisSize.max,
-      //mainAxisAlignment: MainAxisAlignment.center,
-
-      //crossAxisAlignment: CrossAxisAlignment.center,
-      //mainAxisAlignment: MainAxisAlignment.center,
 
       children: <Widget>[
         Container(

@@ -29,9 +29,6 @@ class _LikeWidgetState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-
-
     _interestCard(DocumentSnapshot clothes) => Container(
           width: MediaQuery.of(context).size.width * 0.85,
           child: Column(
@@ -39,9 +36,13 @@ class _LikeWidgetState extends StatelessWidget {
               Container(
                 child: Text(
                   title(clothes['title']),
-                  style: TextStyle(color: Layout.white(), fontSize: 25, fontFamily: 'BalooBhai'),
+                  style: TextStyle(
+                      color: Layout.white(),
+                      fontSize: 25,
+                      fontFamily: 'BalooBhai'),
                 ),
-                padding: EdgeInsets.only(bottom: 10, top: 15, left: 0, right: 0),
+                padding:
+                    EdgeInsets.only(bottom: 10, top: 15, left: 0, right: 0),
               ),
               Container(
                 decoration: BoxDecoration(
@@ -52,7 +53,6 @@ class _LikeWidgetState extends StatelessWidget {
                 width: MediaQuery.of(context).size.width * 0.85,
                 height: 200,
                 padding: EdgeInsets.only(bottom: 0, top: 0, left: 0, right: 0),
-                //Text(clothes["title"]),
               ),
               StreamBuilder(
                   stream: Firestore.instance
@@ -61,6 +61,16 @@ class _LikeWidgetState extends StatelessWidget {
                       .snapshots(),
                   builder: (BuildContext context, AsyncSnapshot snapshot) {
                     if (clothes['uid'] == Authentication.usuarioLogado.uid) {
+                      if (snapshot.data.documents.length == 0) {
+                        return Center(
+                          heightFactor: 1.5,
+                          child: Text(
+                            "Ninguem interessado",
+                            style:
+                                TextStyle(fontSize: 20, color: Layout.white()),
+                          ),
+                        );
+                      }
                       return ListView.builder(
                         scrollDirection: Axis.vertical,
                         shrinkWrap: true,
@@ -79,43 +89,19 @@ class _LikeWidgetState extends StatelessWidget {
                                         AsyncSnapshot snapshot) {
                                       if (!snapshot.hasData)
                                         return const Text('Carregando.....');
-                                        /*
-                                      return Row(
-                                       
-                                        children: <Widget>[
-                                          Expanded(
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: <Widget>[
-                                                IconButton(
-                                                  icon: Icon(FontAwesomeIcons.userAlt, color: Layout.lightBlue(), size: 20),
-                                                  onPressed: (){
-                                                    Navigator.of(context).push(
-                                                MaterialPageRoute(
-                                                    builder: (BuildContext
-                                                            context) =>
-                                                        ProfilePage(
-                                                          user: snapshot.data
-                                                              .documents[0],
-                                                        )));
-                                                  },
-                                                ),
-                                                Container(width: 0),
-                                                Text(doc["uname"], style: TextStyle(color: Layout.white()))
-                                              ],
-                                            )
-
-                                          ),
-                                        ]
-                                      );*/
                                       return ListTile(
-                                  
-                                        dense: true,
-                                        contentPadding: EdgeInsets.fromLTRB(10,0,10,0),
+                                          dense: true,
+                                          contentPadding:
+                                              EdgeInsets.fromLTRB(10, 0, 10, 0),
                                           leading: Icon(
                                               FontAwesomeIcons.userAlt,
                                               color: Layout.lightBlue()),
-                                          title: Text(title(doc["uname"]), style: TextStyle(color: Layout.white(), fontSize: 15),),
+                                          title: Text(
+                                            title(doc["uname"]),
+                                            style: TextStyle(
+                                                color: Layout.white(),
+                                                fontSize: 15),
+                                          ),
                                           onTap: () {
                                             Navigator.of(context).push(
                                                 MaterialPageRoute(
@@ -127,11 +113,6 @@ class _LikeWidgetState extends StatelessWidget {
                                                         )));
                                           });
                                     }),
-                                /*Container(
-                                  padding: EdgeInsets.only(
-                                      bottom: 0, top: 10, left: 0, right: 0),
-                                  child: Text(doc["uname"]),
-                                ),*/
                               ],
                             ),
                           );

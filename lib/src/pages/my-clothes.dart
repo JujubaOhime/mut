@@ -32,15 +32,6 @@ class _MyClothesState extends StatelessWidget {
    @override
   Widget build(BuildContext context) {
 
-    final Distance distance = new Distance();
-    final baseTextStyle = const TextStyle(fontFamily: 'Poppins');
-    final regularTextStyle = baseTextStyle.copyWith(
-        color: Layout.white(),
-        fontSize: 14.0,
-        fontWeight: FontWeight.w400,);
-    final subHeaderTextStyle = regularTextStyle.copyWith(fontSize: 17.0);
-    final headerTextStyle = baseTextStyle.copyWith(
-        color: Colors.white, fontSize: 25.0, fontWeight: FontWeight.w600, );
 
     _clothesCard(DocumentSnapshot doc) => 
     Container(
@@ -75,7 +66,7 @@ class _MyClothesState extends StatelessWidget {
             ),
             Padding(
               padding: EdgeInsets.only(top:6,),
-              child: Text(title(doc['type']), style: subHeaderTextStyle),
+              child: Text(title(doc['type']), style: TextStyle(fontSize: 17, color: Layout.white())),
             ),
             
             Container(
@@ -109,7 +100,7 @@ class _MyClothesState extends StatelessWidget {
                 ),
                 Text( "Tam " +
                   doc["size"], 
-                  style: subHeaderTextStyle,
+                  style: TextStyle( fontSize: 17, color: Layout.white()),
                 ),
                 
               ],
@@ -143,19 +134,10 @@ class _MyClothesState extends StatelessWidget {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
-            /*children: <Widget>[
-              Padding(
-                padding: EdgeInsets.only(bottom: 30),
-                child: Image.network(doc["photo"],fit: BoxFit.contain, height: 200, alignment: Alignment.topCenter, width: double.maxFinite)
-              )
-            ]*/
            
            ),
-          
-          //_clothesImage(doc),
           _clothesCard(doc),
-          
-          //_more(),
+
         ],
       )
     );

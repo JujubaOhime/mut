@@ -55,12 +55,6 @@ class Layout {
                      }
                   
               ),
-              /*
-          new IconButton( icon: new Icon(Icons.favorite), onPressed: (){
-            Navigator.of(context).pop();
-            Navigator.of(context).pushNamed(LikeWidget.tag);
-            
-          }, ),*/
         ],
       ),
       drawer: ClipRRect(
