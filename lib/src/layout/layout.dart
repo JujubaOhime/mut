@@ -42,7 +42,7 @@ class Layout {
                     .where("uid", isEqualTo: Authentication.usuarioLogado.uid)
                     .snapshots(),
                      builder: (BuildContext context, AsyncSnapshot snapshot) {
-                       if (!snapshot.hasData) return const Text('Carregando.....');
+                       if (!snapshot.hasData) return const Center(child: CircularProgressIndicator());
                        return IconButton(
                           icon: new Icon(Icons.favorite), onPressed: (){
                              Navigator.of(context).push(MaterialPageRoute(
@@ -119,7 +119,7 @@ class Layout {
                     .where("uid", isEqualTo: Authentication.usuarioLogado.uid)
                     .snapshots(),
                      builder: (BuildContext context, AsyncSnapshot snapshot) {
-                       if (!snapshot.hasData) return const Text('Carregando.....');
+                      if (!snapshot.hasData) return const Center(child: CircularProgressIndicator());
                        return ListTile(
                           leading: Icon(FontAwesomeIcons.userAlt, color: Layout.lightBlue()),
                           title: Text("Perfil"),

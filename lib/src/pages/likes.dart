@@ -60,6 +60,9 @@ class _LikeWidgetState extends StatelessWidget {
                       .where("clothes", isEqualTo: clothes.documentID)
                       .snapshots(),
                   builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    if (!snapshot.hasData)
+          return const Center(child: CircularProgressIndicator());
+
                     if (clothes['uid'] == Authentication.usuarioLogado.uid) {
                       if (snapshot.data.documents.length == 0) {
                         return Center(
@@ -149,7 +152,7 @@ class _LikeWidgetState extends StatelessWidget {
                       .orderBy('time', descending: true)
                       .snapshots(),
                   builder: (BuildContext context, AsyncSnapshot snapshot) {
-                    if (!snapshot.hasData) return const Text('Carregando.....');
+                    if (!snapshot.hasData) return const Center(child: CircularProgressIndicator());
                     return ListView.builder(
                       shrinkWrap: true,
                       itemCount: snapshot.data.documents.length,

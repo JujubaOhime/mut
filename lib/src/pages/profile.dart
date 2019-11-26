@@ -193,7 +193,7 @@ class _ProfileState extends StatelessWidget {
               .orderBy('time', descending: true)
               .snapshots(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
-            if (!snapshot.hasData) return const Text('Carregando.....');
+            if (!snapshot.hasData) return const Center(child: CircularProgressIndicator());
             return ListView.builder(
               itemCount: snapshot.data.documents.length,
               itemBuilder: (BuildContext context, int index) {

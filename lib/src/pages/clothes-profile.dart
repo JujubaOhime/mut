@@ -105,6 +105,7 @@ class _ProfileClothesState extends StatelessWidget {
           .where("clothes", isEqualTo: clothes.documentID)
           .snapshots(),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
+        if (!snapshot.hasData) return const Center(child: CircularProgressIndicator());
         if (id == Authentication.usuarioLogado.uid) {
           if (snapshot.data.documents.length == 0) {
             return const Center(
