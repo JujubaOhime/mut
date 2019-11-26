@@ -249,7 +249,7 @@ class _EditClothesPage extends State<EditClothesPage> {
               // controller: _taskTimeController,
               style: TextStyle(color: Layout.white()),
               decoration: InputDecoration(
-                  labelText: "Contato",
+                  labelText: "Telefone",
                   contentPadding: new EdgeInsets.only(bottom: 1),
                   labelStyle: TextStyle(
                       fontFamily: 'BalooBhai',

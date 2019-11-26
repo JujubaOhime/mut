@@ -34,8 +34,10 @@ class Authentication {
       final coordinates = new Coordinates(latitude, longitude);
       var addresses = await Geocoder.local.findAddressesFromCoordinates(coordinates);
       var first = addresses.first;
-      String state = first.adminArea;
-      String city = first.subAdminArea;
+      String state;
+      String city;
+      state = first.adminArea;
+      city = first.subAdminArea;
 
       double getLatitude(){
         return myLocation['latitude'];

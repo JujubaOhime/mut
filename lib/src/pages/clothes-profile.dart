@@ -141,13 +141,14 @@ class _ProfileClothesState extends StatelessWidget {
               return Container(
                 child: Column(
                   children: <Widget>[
-                    Text("Interessados"),
+                    //Text("Interessados"),
+                    /*
                     Row(
                       children: <Widget>[
                         Text(doc["uname"]),
-                        RaisedButton(child: Text("Doar"))
+                        
                       ],
-                    ),
+                    ),*/
                   ],
                 ),
               );
@@ -272,7 +273,10 @@ class _ProfileClothesState extends StatelessWidget {
       child: SingleChildScrollView(
         padding: EdgeInsets.all(25),
         child: ListBody(
-          children: <Widget>[displayFoto(), coluna(), _showInterest],
+          children: <Widget>[
+            displayFoto(), 
+            coluna(), 
+            _showInterest],
         ),
       ),
     );

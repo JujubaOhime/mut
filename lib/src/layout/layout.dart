@@ -9,8 +9,7 @@ import 'package:mut/src/layout/layout-bloc.dart';
 import 'package:mut/src/login/login-bloc.dart';
 import 'package:mut/src/login/login-widget.dart';
 import 'package:mut/src/pages/home-widget.dart';
-import 'package:mut/src/pages/matches.dart';
-import 'package:mut/src/pages/my-clothes.dart' as prefix0;
+import 'package:mut/src/pages/likes.dart';
 import 'package:mut/src/pages/my-clothes.dart';
 import 'package:mut/src/pages/new-clothes.dart';
 import 'package:mut/src/pages/profile.dart';
@@ -38,10 +37,30 @@ class Layout {
             borderRadius: BorderRadius.vertical(bottom: Radius.circular(30))),
         centerTitle: true,
         actions: <Widget>[
+          StreamBuilder(
+                 stream: Firestore.instance.collection('User')
+                    .where("uid", isEqualTo: Authentication.usuarioLogado.uid)
+                    .snapshots(),
+                     builder: (BuildContext context, AsyncSnapshot snapshot) {
+                       if (!snapshot.hasData) return const Text('Carregando.....');
+                       return IconButton(
+                          icon: new Icon(Icons.favorite), onPressed: (){
+                             Navigator.of(context).push(MaterialPageRoute(
+                              builder: (BuildContext context) => LikeWidget(
+                                    user: snapshot.data.documents[0],
+                                  )));
+                          },
+                          
+                       );
+                     }
+                  
+              ),
+              /*
           new IconButton( icon: new Icon(Icons.favorite), onPressed: (){
             Navigator.of(context).pop();
-            Navigator.of(context).pushNamed(MatchWidget.tag);
-          }, ),
+            Navigator.of(context).pushNamed(LikeWidget.tag);
+            
+          }, ),*/
         ],
       ),
       drawer: ClipRRect(
